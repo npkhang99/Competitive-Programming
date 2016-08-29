@@ -1,0 +1,13 @@
+*.exe
+*.out
+*.o
+*.bak
+*.log
+input
+output
+sampleoutput
+*.in
+*.ans
+in
+out
+ans
