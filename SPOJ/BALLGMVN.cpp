@@ -51,7 +51,7 @@ void xuly(){
 		sort(r+1,r+n+1,comp);
 		for(int j=2; j<=n; j++)
 			if(r[j].cotg==r[j-1].cotg){
-				cout<< g[i].tt<< " "<< r[j-1].tt<< " "<< r[j].tt<< endl;
+				cout<< g[i].tt<< " "<< r[j-1].tt<< " "<< r[j].tt<< '\n';
 				return;
 			}
 	}
@@ -60,7 +60,7 @@ void xuly(){
 		sort(g+1,g+n+1,comp);
 		for(int j=2; j<=n; j++)
 			if(g[j].cotg==g[j-1].cotg){
-				cout<< r[i].tt<< " "<< g[j-1].tt<< " "<< g[j].tt<< endl;
+				cout<< r[i].tt<< " "<< g[j-1].tt<< " "<< g[j].tt<< '\n';
 				return;
 			}
 	}
