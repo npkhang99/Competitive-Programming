@@ -18,7 +18,7 @@ def DFS(root, u):
 	for v in vector[u]:
 		cost[root][v] = min(cost[root][u]+1, cost[root][v])
 		if not b[v]: DFS(root,v)
-		
+
 def BFS(root):
 	q = []
 	q.insert(0,root)
@@ -40,7 +40,7 @@ for i in range(m):
 	# for j in range(n): b[j]=False
 	# # DFS(i,i)
 	# BFS(i)
-	
+
 for k in range(1,n):
 	for i in range(1,n):
 		for j in range(1,n):
@@ -65,7 +65,7 @@ def findPath(s):
 					cpath = list(current[3])
 					cpath.append(v)
 					q.append([verNum+1, v, du+cost[u][v], cpath])
-		elif ans <= du:
+		elif ans < du:
 			ans, path = du, current[3]
 			# print(ans, path)
 
@@ -77,3 +77,4 @@ for i in range(1,n):
 
 for i in path:
 	print(i, end=' ')
+print()

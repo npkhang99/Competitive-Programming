@@ -8,7 +8,7 @@ int m, a[N]={}, b[N]={}, colNum=0, rowNum=0;
 long long n;
 
 int main(){
-	scanf("%I64d%d\n",&n,&m);
+	scanf("%lld%d\n",&n,&m);
 	long long left = n*n;
 	for(int i=0; i<m; i++){
 		int x,y; scanf("%d%d\n",&x,&y);
@@ -16,7 +16,7 @@ int main(){
 		if(!b[y]){ left-=n-colNum; rowNum+=1; }
 		// if(!a[x] && !b[y]) left+=1;
 		a[x] = b[y] = 1;
-		printf("%I64d ",left);
+		printf("%lld ",left);
 	}
 	printf("\n");
 	return 0;
