@@ -6,10 +6,10 @@ Procedure xuat;
    Var j:integer;
    Begin
         if pos('11',s)=0 then 
-		   Begin
-		        inc(d);
-				writeln(s);
-			End;
+           Begin
+                inc(d);
+                writeln(s);
+            End;
    End;
 {-------------------}
 Procedure try(i:integer);
@@ -28,6 +28,6 @@ BEGIN
      write('Nhap N: ');readln(n);
      s:='0000';d:=0;
      try(1);
-	 write(d);
+     write(d);
      readln;
 END.

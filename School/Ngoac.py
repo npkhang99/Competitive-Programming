@@ -5,5 +5,5 @@ st = inp.read()
 stack = []
 
 for i in range(len(st)):
-	if(st[i]==')'): print(stack.pop()+1, i+1)
-	else: stack.append(i)
+    if(st[i]==')'): print(stack.pop()+1, i+1)
+    else: stack.append(i)

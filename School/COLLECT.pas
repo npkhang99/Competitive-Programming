@@ -1,15 +1,15 @@
 Const fi='COLLECT.inp';
-	  fo='COLLECT.out';
+      fo='COLLECT.out';
 Var 
 //---------------------------------------------------------
 Procedure docfile;
-	Var f:text;
-		i:integer;
-	Begin
-		
-	End;
+    Var f:text;
+        i:integer;
+    Begin
+        
+    End;
 //=========================================================
 BEGIN
-	docfile;
-	xuly;
+    docfile;
+    xuly;
 END.

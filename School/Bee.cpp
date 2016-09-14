@@ -9,10 +9,10 @@ const int N=1009;
 int n, a[N][N], ans=0;
 
 int main(){
-	// freopen("Bee.inp","r",stdin);
-	// freopen("Bee.out","w",stdout);
-	scanf("%d",&n);
-	
-	printf("%d\n",ans);
-	return 0;
+    // freopen("Bee.inp","r",stdin);
+    // freopen("Bee.out","w",stdout);
+    scanf("%d",&n);
+    
+    printf("%d\n",ans);
+    return 0;
 }

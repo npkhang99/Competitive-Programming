@@ -13,8 +13,8 @@
 * gọi c -> tập chọn, u -> tập ứng cử viên
 * nếu gọi chọn(s,u) -> chọn({},{1,2,..,n})
 * xét i có 2 trường hợp:
-*	+ Không chọn: c , u\{i}
-*	+ Chọn: c U {i}, (u\{i}) giao với N(i)	~ Với N(i) là tập các đỉnh không kề với i
+*    + Không chọn: c , u\{i}
+*    + Chọn: c U {i}, (u\{i}) giao với N(i)    ~ Với N(i) là tập các đỉnh không kề với i
 * (Bài toán NP-Hard)
 */
 
@@ -22,15 +22,15 @@
 * Đồ thị không có đỉnh nào có bậc > 2
 * Chia thành các vùng liên thông
 * Với mỗi vùng sẽ có 2 dạng:
-*	+ Dạng đường thẳng
-*	+ Dạng vòng
+*    + Dạng đường thẳng
+*    + Dạng vòng
 * Tìm tập gồn 2h đỉnh (2h>k) mà tổng là lớn nhất
 * - Với TH1: Tìm dãy số có tổng là lớn nhất
-*	F[i,j]: từ 1->i chọn j số và i được chọn
-*	F[i,j] = F[i',j-1]+p[i] (i'<i-1)
-*	F[i,j,t]: từ 1->i chọn j, t = 0 thì số i không được chọn, t = 1 thì số i được chọn
-*	F[i,j,0] = max(F[i-1,j,0] , F[i-1,j,1])
-*	F[i,j,1] = F[i-1,j-1,0]+p[i]
+*    F[i,j]: từ 1->i chọn j số và i được chọn
+*    F[i,j] = F[i',j-1]+p[i] (i'<i-1)
+*    F[i,j,t]: từ 1->i chọn j, t = 0 thì số i không được chọn, t = 1 thì số i được chọn
+*    F[i,j,0] = max(F[i-1,j,0] , F[i-1,j,1])
+*    F[i,j,1] = F[i-1,j-1,0]+p[i]
 * - Với TH2: Đưa về TH1
 */
 
@@ -43,6 +43,6 @@ const int N=509;
 int n, a[N], b[N];
 
 int main(){
-	
-	return 0;
+    
+    return 0;
 }

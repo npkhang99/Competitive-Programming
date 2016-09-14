@@ -37,7 +37,7 @@ Function tong(a:longint):int64;
 //-------------------------------
 Procedure Wires(d,c:longint);
    Var x:longint;
-       ktong:int64;	
+       ktong:int64;    
    Begin
         if d>c then
            Begin

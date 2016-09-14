@@ -19,16 +19,16 @@ const int N=19;
 int n, m, k, a[N][N]={}, dp[1<<N][1<<N]={};
 
 int main(){
-	scanf("%d%d%d\n",&n,&m,&k);
-	for(int i=0; i<m; i++){
-		int x,y; scanf("%d%d\n",&x,&y);
-		a[x][y] = a[y][x] = 1;
-	}
+    scanf("%d%d%d\n",&n,&m,&k);
+    for(int i=0; i<m; i++){
+        int x,y; scanf("%d%d\n",&x,&y);
+        a[x][y] = a[y][x] = 1;
+    }
 
-	// for(int i=0; i<n; i++) a[i][i] = 1;
-	for(int i=0; i<n; i++)
-		for(int j=0; j<n; j++)
-			if(a[i][j] && !dp[1<<i][1<<j]) dp[1<<i][1<<j] = 1;
-	
-	return 0;
+    // for(int i=0; i<n; i++) a[i][i] = 1;
+    for(int i=0; i<n; i++)
+        for(int j=0; j<n; j++)
+            if(a[i][j] && !dp[1<<i][1<<j]) dp[1<<i][1<<j] = 1;
+    
+    return 0;
 }

@@ -30,15 +30,15 @@
  * nếu dùng struct phải viết hàm so sánh riêng
  */
 
-#include <iostream>		// cin, cout
-#include <stdlib.h>		// srand, rand
-#include <time.h>		// time
-#include <algorithm>	// sort
+#include <iostream>        // cin, cout
+#include <stdlib.h>        // srand, rand
+#include <time.h>        // time
+#include <algorithm>    // sort
 using namespace std;
 
 // le' STRUCT
 struct leStruct{
-	int x,y;
+    int x,y;
 }b[10009];
 
 int a[10009], n;
@@ -52,49 +52,49 @@ int a[10009], n;
 
 // hàm comp1() này có tác dụng để sắp xếp mảng a[] theo chiều tăng dần
 int comp1(int a, int b){
-	return a>b;
+    return a>b;
 }
 
 // hàm comp2() có tác dụng sắp xếp tăng theo chiều x
 // nếu x bằng nhau thì sẽ sắp xếp giảm theo chiều y
 int comp2(leStruct a, leStruct b){
-	return a.x<b.x || (a.x==b.x && a.y>b.y);
+    return a.x<b.x || (a.x==b.x && a.y>b.y);
 }
 
 int main(){
-	// tạo mảng ngẫu nhiên
-	srand(time(0));
-	// cin>> n;
-	n = 7;
-	for(int i=0; i<n; i++){
-		a[i] = rand()%20;
-		b[i].x = rand()%10;
-		b[i].y = rand()%10;
-	}
+    // tạo mảng ngẫu nhiên
+    srand(time(0));
+    // cin>> n;
+    n = 7;
+    for(int i=0; i<n; i++){
+        a[i] = rand()%20;
+        b[i].x = rand()%10;
+        b[i].y = rand()%10;
+    }
 
-	cout<< "Cac mang goc: \n";
-	for(int i=0; i<n; i++) cout<< a[i]<< " ";
-	cout<< endl<< endl;
-	for(int i=0; i<n; i++) cout<< b[i].x<< " "<< b[i].y<< endl;
-	cout<< endl;
+    cout<< "Cac mang goc: \n";
+    for(int i=0; i<n; i++) cout<< a[i]<< " ";
+    cout<< endl<< endl;
+    for(int i=0; i<n; i++) cout<< b[i].x<< " "<< b[i].y<< endl;
+    cout<< endl;
 
-	// sắp xếp tăng dần các phần tử từ 0 -> n-1
-	sort(a,a+n);
-	cout<< "Sap xep mang a[] tang dan: ";
-	for(int i=0; i<n; i++) cout<< a[i]<< " ";
-	cout<< endl;
+    // sắp xếp tăng dần các phần tử từ 0 -> n-1
+    sort(a,a+n);
+    cout<< "Sap xep mang a[] tang dan: ";
+    for(int i=0; i<n; i++) cout<< a[i]<< " ";
+    cout<< endl;
 
-	// sắp xếp giảm dần các phần tử từ 0 -> n-1
-	sort(a,a+n,comp1);
-	cout<< "Sap xep mang a[] giam dan: ";
-	for(int i=0; i<n; i++) cout<< a[i]<< " ";
-	cout<< endl;
+    // sắp xếp giảm dần các phần tử từ 0 -> n-1
+    sort(a,a+n,comp1);
+    cout<< "Sap xep mang a[] giam dan: ";
+    for(int i=0; i<n; i++) cout<< a[i]<< " ";
+    cout<< endl;
 
-	// để sắp xếp 2 tiêu chí ta cũng cần viết hàm so sánh riêng
-	// với điều kiện trả về có thay đổi một chút
-	// cũng giống như sắp xếp nhiều tiêu chí thôi
-	sort(b,b+n,comp2);
-	cout<< "Sap xep mang b[] theo 2 tieu chi: \n";
-	for(int i=0; i<n; i++) cout<< b[i].x<< " "<< b[i].y<< endl;
-	return 0;
+    // để sắp xếp 2 tiêu chí ta cũng cần viết hàm so sánh riêng
+    // với điều kiện trả về có thay đổi một chút
+    // cũng giống như sắp xếp nhiều tiêu chí thôi
+    sort(b,b+n,comp2);
+    cout<< "Sap xep mang b[] theo 2 tieu chi: \n";
+    for(int i=0; i<n; i++) cout<< b[i].x<< " "<< b[i].y<< endl;
+    return 0;
 }

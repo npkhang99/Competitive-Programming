@@ -6,8 +6,8 @@ else: print((n//7)*2, end=' ')
 
 if n < 3: print(n)
 else:
-	ans = 2
-	n-=2
-	if n%7 == 6: ans+=(n//7)*2+1
-	else: ans+=(n//7)*2
-	print(ans)
+    ans = 2
+    n-=2
+    if n%7 == 6: ans+=(n//7)*2+1
+    else: ans+=(n//7)*2
+    print(ans)

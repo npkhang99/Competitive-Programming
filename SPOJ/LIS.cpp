@@ -8,13 +8,13 @@ int n, a[N]={}, b[N]={}, L[N]={}, m=0;
 vector<int> ans;
  
 int main(){
-	cin>> n;
-	for(int i=1; i<=n; i++) cin>> a[i];
-	for(int i=1; i<=n; i++){
-		L[i] = lower_bound(b+1, b+m+1, a[i])-b;
-		m = max(m,L[i]);
-		b[L[i]] = a[i];
-	}
-	printf("%d\n",m);
-	return 0;
+    cin>> n;
+    for(int i=1; i<=n; i++) cin>> a[i];
+    for(int i=1; i<=n; i++){
+        L[i] = lower_bound(b+1, b+m+1, a[i])-b;
+        m = max(m,L[i]);
+        b[L[i]] = a[i];
+    }
+    printf("%d\n",m);
+    return 0;
 } 

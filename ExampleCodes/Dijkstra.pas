@@ -8,9 +8,9 @@ Var G:array[1..1000,1..1000] of integer;
     f:text;
 //------------------------------
 Procedure docfile;
-	Var i,j,x,y:integer;
-	Begin
-		assign(f,fi);
+    Var i,j,x,y:integer;
+    Begin
+        assign(f,fi);
         reset(f);
         readln(f,n,m,s,t);
         for i:=1 to n do
@@ -19,23 +19,23 @@ Procedure docfile;
                 else G[i,j]:=infty;
         for i:=1 to m do
             Begin
-				readln(f,x,y,G[x,y]);
+                readln(f,x,y,G[x,y]);
                 G[y,x]:=G[x,y];
             End;
         close(f);
-	End;
+    End;
 //------------------------------
 Procedure ddi(u:integer);
-	Begin
+    Begin
         if u=s then write(f,u)
         else Begin
                 ddi(Tr[u]);
                 write(f,' ',u);
              End;
-	End;
+    End;
 //------------------------------
 Procedure xuat;
-	Begin
+    Begin
         assign(f,fo);
         rewrite(f);
         writeln(f,L[t]);

@@ -10,5 +10,5 @@ r = s*e
 
 if v<=r: print("NO")
 else:
-	ans = (s*h)/(v-r)
-	print("YES\n",ans,sep='')
+    ans = (s*h)/(v-r)
+    print("YES\n",ans,sep='')

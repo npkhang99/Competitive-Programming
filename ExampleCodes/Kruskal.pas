@@ -60,7 +60,7 @@ Procedure Kruskal;
         fillchar(c,sizeof(c),false);
         fillchar(d,sizeof(d),false);
         T:=1;
-		C[1]:=true; D[G[1].u]:=true; D[G[1].v]:=true; S:=G[1].val;
+        C[1]:=true; D[G[1].u]:=true; D[G[1].v]:=true; S:=G[1].val;
         repeat
             for i:=1 to m do
                 if (not C[i]) and (D[G[i].u] Xor D[G[i].v]) then
