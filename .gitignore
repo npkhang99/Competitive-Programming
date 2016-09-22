@@ -5,9 +5,9 @@
 *.log
 input
 output
-sampleoutput
 *.in
 *.ans
 in
 out
 ans
+*.class

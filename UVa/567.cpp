@@ -23,7 +23,7 @@ void floyd(){
 }
 
 int main(){
-    // freopen("UVa567.txt","w",stdout);
+    ios::sync_with_stdio(false); cin.tie(0);
     int x,y;
     while(cin>> n){
         init();
