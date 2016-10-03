@@ -23,8 +23,8 @@ void BFS(){
 }
 
 int main(){
-    freopen("BFS1.inp","r",stdin);
-    freopen("BFS1.out","w",stdout);
+    // freopen("BFS1.inp","r",stdin);
+    // freopen("BFS1.out","w",stdout);
     scanf("%d%d",&n,&m);
     for(int i=0; i<m; i++){
         int x,y; scanf("%d%d",&x,&y);

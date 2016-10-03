@@ -1,50 +1,22 @@
-#include <iostream>
-#include <algorithm>
-#include <fstream>
-#define fi "SEQ.inp"
-#define fo "SEQ.out"
+#include <stdio.h>
 using namespace std;
 
-int n, k, a[100000];
-//---------------------------------------------------------
-void docfile(){
-    fstream f;
-    f.open(fi, ios::in);
-    f>> n>> k;
-    for(int i=0; i<n; i++)
-        f>> a[i];
-    f.close();
-}
-//---------------------------------------------------------
-void xuat(int x, int y){
-    fstream f;
-    f.open(fo, ios::out);
-    if (x==y==0) f<< "0 0";
-    else if (a[x]-a[y]==k) f<< x<< " "<< y;
-    else f<< y<< " "<< x;
-    f.close();
-}
-//---------------------------------------------------------
-int binS(int l, int r, int x, int y){
-    if(l>r) return(-1);
-    int m=a[(l+r)/2];
-    if ((m==x) && (((l+r)/2)!=y)) return((l+r)/2);
-    else if (x<m) return(binS(l, (l+r)/2-1, x, y));
-    else return(binS((l+r)/2+1, r, x, y));
-}
-//---------------------------------------------------------
-void xuly(){
-    int deviate, vt;
-    sort(a, a+n);
-    for (int i=0; i<n; i++){
-        deviate=k-a[i];
-        vt=binS(0, n, deviate, i);
-        if (vt!=-1) xuat(i,vt);
-    }
-}
-//---------------------------------------------------------
+const int N=10009;
+
+int n, a[N]={}, dp[N]={};
+
 int main(){
-    docfile;
-    xuly();
+    // freopen("SEQ.inp","r",stdin);
+    // freopen("SEQ.out","w",stdout);
+    scanf("%d",&n);
+    for(int i=0; i<n; i++) scanf("%d",&a[i]);
+    int ans = 1;
+    for(int i=0; i<n; i++){
+        dp[i] = 1;
+        for(int j=i-1; j>=0; j--)
+            if(a[i]%a[j]==0) dp[i] = dp[i]<dp[j]+1? dp[j]+1:dp[i];
+        ans = ans<dp[i]? dp[i]:ans;
+    }
+    printf("%d\n",ans);
     return 0;
 }

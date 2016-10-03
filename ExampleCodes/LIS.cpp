@@ -1,4 +1,4 @@
-    // Finding LIS (Longest Increasing Subsequence) with O(n log n) NOW IN C++!
+// Finding LIS (Longest Increasing Subsequence) with O(n log n) NOW IN C++!
 #include <iostream>        // cin
 #include <stdio.h>        // printf
 #include <algorithm>    // lower_bound max

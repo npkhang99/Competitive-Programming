@@ -1,18 +1,18 @@
 Const fi='';
       fo='';
 Type diem=Record
-        x,y,xx,yy:longint;
+        x,y,xx,yy:int64;
         cotg:real;
      End;
-Var a:array[1..1000001] of diem;
-    st,c:array[1..1000001] of longint;
+Var a:array[1..10000001] of diem;
+    st,c:array[1..10000001] of longint;
     n,r,k,x0,y0:longint;
 //---------------------------------------------------------
 Function dttg(d1,d2,d3:diem):int64;
     Begin
-        dttg:=(int64(d2.x-d1.x) * int64(d2.y+d1.y)) + 
-              (int64(d3.x-d2.x) * int64(d3.y+d2.y)) +
-              (int64(d1.x-d3.x) * int64(d1.y+d3.y));
+        dttg:=(d2.x - d1.x) * (d2.y + d1.y) + 
+              (d3.x - d2.x) * (d3.y + d2.y) +
+              (d1.x - d3.x) * (d1.y + d3.y);
     End;
 //---------------------------------------------------------
 Function dt_bao:int64;
@@ -20,7 +20,7 @@ Function dt_bao:int64;
     Begin
         dt_bao:=0;
         for i:=1 to r-1 do
-            dt_bao:=dt_bao + int64(a[st[i+1]].x - a[st[i]].x) * int64(a[st[i+1]].y + a[st[i]].y);
+            dt_bao:=dt_bao + (a[st[i+1]].x - a[st[i]].x) * (a[st[i+1]].y + a[st[i]].y);
         dt_bao:=abs(dt_bao);
     End;
 //---------------------------------------------------------
@@ -47,9 +47,9 @@ Procedure xuat;
         assign(f,fo);
         rewrite(f);
         //writeln(f,r-1);
-        writeln(f,(dt_bao/2):0:1);
+        writeln(f,dt_bao/2:0:1);
         //for i:=1 to r-1 do
-        //    with a[st[i]] do writeln(f,x+x0,' ',y+y0);
+        //  with a[st[i]] do writeln(f,x+x0,' ',y+y0);
         close(f);
     End;
 //---------------------------------------------------------
