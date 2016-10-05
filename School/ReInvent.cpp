@@ -12,24 +12,22 @@ typedef pair<int,int> ii;
 
 const int N=100009;
 
-int n, m, k, d[N]={};
+int n, m, k, d[N]={}, c[N]={};
 vector<int> a[N], choose;
 
 void BFS(){
-    queue<ii> q;
+    queue<int> q;
     for(int i=1; i<=n; i++) d[i] = 10E8;
-    for(int i=0; i<choose.size(); i++)
-        q.push(ii(choose[i],choose[i])), d[choose[i]] = 0;
+    for(int ver:choose) q.push(ver), d[ver] = 0, c[ver] = ver;
     while(!q.empty()){
-        ii u = q.front(); q.pop();
-        printf("%d %d\n",u.fi,u.se);
-        for(int i=0; i<a[u.fi].size(); i++){
-            ii v(a[u.fi][i],u.se);
-            if(v.se != u.se){
-                printf("%d\n",d[u.fi]+d[v.fi]+1);
+        int u = q.front(); q.pop();
+        for(int i=0; i<a[u].size(); i++){
+            int v = a[u][i];
+            if(c[v] && c[v]!=c[u]){
+                printf("%d\n",d[v]+d[u]+1);
                 return;
-            }else if(d[u.fi]+1 < d[v.fi])
-                q.push(v), d[v.fi] = d[u.fi]+1;
+            }
+            if(!c[v] && d[v] > d[u]+1) d[v] = d[u]+1, q.push(v), c[v] = c[u];
         }
     }
 }
