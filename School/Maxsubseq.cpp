@@ -20,7 +20,7 @@ int main(){
     long long ans  = 0;
     if(l==r){
         for(int i=l; i<=n; i++) ans = max(ans, L[i]-L[i-l]);
-        printf("%I64d\n",ans);
+        printf("%lld\n",ans);
         return 0;
     }
     for(int i=l; i<=n; i++){
@@ -29,6 +29,6 @@ int main(){
         int currMin = *(bst.begin());
         ans = max(ans, L[i]-currMin);
     }
-    printf("%I64d\n",ans);
+    printf("%lld\n",ans);
     return 0;
 }

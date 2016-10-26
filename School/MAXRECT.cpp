@@ -57,6 +57,6 @@ int main(){
     }
     long long ans = 0;
     for(int i=0; i<n; i++) ans = max(ans,calc(i));
-    printf("%I64d\n",ans);
+    printf("%lld\n",ans);
     return 0;
 }

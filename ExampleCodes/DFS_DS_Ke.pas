@@ -20,7 +20,7 @@ Procedure docfile;
     End;
 //---------------------------------------------------------
 Procedure chuyen;
-    Var    i:integer;
+    Var i:integer;
     Begin
         fillchar(head,sizeof(head),0);
         for i:=1 to m do

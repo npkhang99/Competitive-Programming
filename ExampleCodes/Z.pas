@@ -1,3 +1,4 @@
+// Z-Function of String Matching
 Uses Math;
 Var z:array[1..1000] of longint;
     s,t,x:ansistring;

@@ -14,7 +14,7 @@ long long GCD(long long a, long long b){
 int main(){
     // freopen("SHARE.inp","r",stdin);
     // freopen("SHARE.out","w",stdout);
-    scanf("%I64d%I64d",&n,&m);
-    printf("%I64d\n",m-GCD(n,m));
+    scanf("%lld%lld",&n,&m);
+    printf("%lld\n",m-GCD(n,m));
     return 0;
 }

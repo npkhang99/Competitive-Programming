@@ -29,7 +29,7 @@ int main(){
     if(c%d!=0){ printf("0\n"); exit(0); }
     long long xt=x, yt=y, p = b/d, q = a/d, k;
     int ans=0;
-    // printf("%I64d %I64d\n",x,y);
+    // printf("%lld %lld\n",x,y);
     k = -x/p;
     while(y-k*q>0) if(x+(k++)*p>0) ans+=1;
     k = -y/q;

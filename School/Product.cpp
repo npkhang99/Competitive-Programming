@@ -12,8 +12,8 @@ int main(){
     // freopen("Product.inp","r",stdin);
     // freopen("Product.out","w",stdout);
     scanf("%d%d\n",&n,&k);
-    for(int i=0; i<n; i++) scanf("%I64d",&a[i]);
-    for(int i=0; i<k; i++) scanf("%I64d",&b[i]);
+    for(int i=0; i<n; i++) scanf("%lld",&a[i]);
+    for(int i=0; i<k; i++) scanf("%lld",&b[i]);
     
     d[0]=a[0];
     for(int i=1; i<n; i++) d[i] = d[i-1]+a[i];
@@ -21,7 +21,7 @@ int main(){
     for(int i=0; i<k; i++){
         int vt = upper_bound(a,a+n,b[i])-a;
         long long ans = d[vt-1]+b[i]*(n-vt);
-        printf("%I64d ",ans);
+        printf("%lld ",ans);
     }
     printf("\n");
     return 0;

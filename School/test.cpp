@@ -24,6 +24,6 @@ int main(){
         // printf("%d %d\n",l,r);
         ans = max(ans,b[r]-b[l-1]);
     }
-    printf("%I64d\n",ans);
+    printf("%lld\n",ans);
     return 0;
 }

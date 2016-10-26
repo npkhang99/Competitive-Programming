@@ -23,6 +23,6 @@ int main(){
     for(int i=1; i<=n-k+1; i++)
         for(int j=1; j<=m-k+1; j++)
             ans = max(ans, L[i+k-1][j+k-1] - L[i+k-1][j-1] - L[i-1][j+k-1] + L[i-1][j-1]);
-    printf("%I64d\n",ans);
+    printf("%lld\n",ans);
     return 0;
 }

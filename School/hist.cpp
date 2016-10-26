@@ -45,7 +45,7 @@ int main(){
         
         long long ans = 0;
         for(int i=0; i<n; i++) ans = max(ans,(long long)((l[i]+r[i])*a[i]));
-        printf("%I64d\n",ans);
+        printf("%lld\n",ans);
     }
     return 0;
 }

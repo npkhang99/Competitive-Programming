@@ -51,6 +51,6 @@ int main(){
     ans = find();
     for(int i=0; i<n; i++) a[i] = m-a[i];
     ans = max(ans,find());
-    printf("%I64d\n",ans);
+    printf("%lld\n",ans);
     return 0;
 }

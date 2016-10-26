@@ -34,6 +34,6 @@ int main(){
                 else ans+=(cnt[need])*(cnt[v[i]]);
         }
     }
-    printf("%I64d\n",ans);
+    printf("%lld\n",ans);
     return 0;
 }

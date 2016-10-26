@@ -19,7 +19,7 @@ void xuly(){
     sort(a,a+n);
     for(int i=0; i<n; i++)
         if(curr >= a[i]){
-            // printf("%d %I64d\n",i,curr);
+            // printf("%d %lld\n",i,curr);
             if(a[i]%2 && !p) continue;
             ans+=1;
             int qNeed = a[i]/2;

@@ -26,6 +26,6 @@ int main(){
         else ans+=a[i]*(sum-a[i]-a[i+1]+a[i-1]);
         sum-=a[i];
     }
-    printf("%I64d\n",ans);
+    printf("%lld\n",ans);
     return 0;
 }

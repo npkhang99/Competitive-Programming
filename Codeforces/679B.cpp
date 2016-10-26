@@ -20,15 +20,15 @@ int main(){
         if(i==1){
             cnt+=min(7,n-ans);
             ans+=min(7,n-ans);
-            printf("%d %d %I64d %I64d\n",cnt,i,ans,n-ans);
+            printf("%d %d %lld %lld\n",cnt,i,ans,n-ans);
             break;
         }
         cnt+=1;
         ans+=cube(i);
-        printf("%d %d %I64d %I64d\n",cnt,i,ans,n-ans);
+        printf("%d %d %lld %lld\n",cnt,i,ans,n-ans);
         while((i>0 && cube(i)>n-ans) || cube(i-1)>n-ans) i-=1;
         if(i==2 && n-ans-cube(2)<6) i=1;
     }
-    printf("%d %I64d",cnt,ans);
+    printf("%d %lld",cnt,ans);
     return 0;
 }
