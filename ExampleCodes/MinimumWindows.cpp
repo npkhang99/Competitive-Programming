@@ -1,7 +1,6 @@
 // Finding the minimum element in every window of size K in an array size N using deque (Double-Ended Queue)
-#include <iostream>
 #include <stdio.h>    // printf scanf freopen
-#include <deque>    // deque empty front back pop_back pop_front push_back
+#include <deque>      // deque empty front back pop_back pop_front push_back
 using namespace std;
 
 const int N=500009;

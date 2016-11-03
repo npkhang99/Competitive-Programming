@@ -47,8 +47,8 @@ void dijkstra(int s, int t){
             }
         }
     }
-    if(!b[t] && pq.empty()){ printf("-1\n"); return; }
-    trace(n);
+    if(!b[t] && pq.empty()) printf("-1\n");
+    else trace(n);
 }
 
 int main(){

@@ -1,7 +1,7 @@
 #include <iostream>    // cin
-#include <stdio.h>    // printf freopen
+#include <stdio.h>     // printf freopen
 #include <stdlib.h>    // exit
-#include <vector>    // vector
+#include <vector>      // vector
 using namespace std;
 
 const int N=1009;

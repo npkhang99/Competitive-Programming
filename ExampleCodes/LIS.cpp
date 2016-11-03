@@ -1,8 +1,8 @@
-// Finding LIS (Longest Increasing Subsequence) with O(n log n) NOW IN C++!
+// Finding LIS (Longest Increasing Subsequence) with O(n log n) time complexity
 #include <iostream>        // cin
-#include <stdio.h>        // printf
-#include <algorithm>    // lower_bound max
-#include <vector>        // vector
+#include <stdio.h>         // printf
+#include <algorithm>       // lower_bound max
+#include <vector>          // vector
 using namespace std;
 
 const int N=100009;

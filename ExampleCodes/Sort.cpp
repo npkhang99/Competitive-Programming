@@ -32,8 +32,8 @@
 
 #include <iostream>        // cin, cout
 #include <stdlib.h>        // srand, rand
-#include <time.h>        // time
-#include <algorithm>    // sort
+#include <time.h>          // time
+#include <algorithm>       // sort
 using namespace std;
 
 // le' STRUCT

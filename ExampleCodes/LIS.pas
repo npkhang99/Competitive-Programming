@@ -1,15 +1,18 @@
-// Longest Increasing Subsequence using Binary Search O(n log n)
+// Longest Increasing Subsequence with O(n log n) time complexity
 Const fi='';
-{    11
-    3 4 -1 5 8 2 3 12 7 9 10    }
+{
+Sample test case:
+11
+3 4 -1 5 8 2 3 12 7 9 10
+}
       fo='';
       n_=100009;
 Type int=longint;
      bool=boolean;
 Var a:array[0..n_] of int;    // source array
     t:array[0..n_] of int;    // temporary store the last index of the LIS of length i
-    tr:array[0..n_] of int;    // trace back array
-    b:array[0..n_] of bool; // mark the elements which is in the final LIS
+    tr:array[0..n_] of int;   // trace back array
+    b:array[0..n_] of bool;   // mark the elements which is in the final LIS
     n:int;
 //---------------------------------------------------------
 Procedure getData();

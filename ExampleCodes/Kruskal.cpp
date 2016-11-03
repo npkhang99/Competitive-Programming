@@ -1,8 +1,7 @@
 // Finding Minimum Spanning Tree Using DSUF (Disjoint Set Union-Find data structure)
 // http://vn.spoj.com/problems/QBMST/
-#include <iostream>        //
-#include <stdio.h>        // scanf printf
-#include <algorithm>    // sort
+#include <stdio.h>         // scanf printf
+#include <algorithm>       // sort
 using namespace std;
 
 const int N=100009;
