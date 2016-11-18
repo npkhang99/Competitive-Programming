@@ -55,17 +55,12 @@ void xuly(){
             }
         }
     }
-    for(i,1,n){
-        for(j,1,n)
-            if (a[i][j]==INT_MAX) cout<< "0 ";
-            else cout<< a[i][j]<< " ";
-        cout<< endl;
-    }
 }
 //---------------------------------------------------------
 int main(){
+    ios::sync_with_stdio(false); cin.tie(0);
     freopen("QBBishop.inp", "r", stdin);
-    //freopen("QBBishop.out", "w", stdout);
+    freopen("QBBishop.out", "w", stdout);
     doc();
     xuly();
     if (a[s][t]!=INT_MAX)cout<< a[s][t];

@@ -1,4 +1,4 @@
-Uses Math, Crt;
+Uses Math;
 Const fi='Rot.inp';
       fo='Rot.out';
 Var a,b:array[1..1000,1..1000] of char;

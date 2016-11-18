@@ -30,7 +30,7 @@ Procedure swap(var a,b:longint);
 Procedure qsort(l,r:longint);
     Var i,j,m:longint;
     Begin
-        i:=l; j:=r; m:=a[i + random(j-i+1)]; // random element is prefered
+        i:=l; j:=r; m:=a[i + random(j-i+1)]; // random pivot is prefered
         repeat
             while a[i]<m do inc(i);
             while a[j]>m do dec(j);

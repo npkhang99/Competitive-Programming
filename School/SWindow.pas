@@ -1,7 +1,7 @@
 Uses math;
 Const fi='SWindow.inp';
       fo='SWindow.out';
-Var z:array[1..1000000] of longint;
+Var z:array[1..2000000] of longint;
     t,p,x:ansistring;
     n,k,m:longint;
 //---------------------------------------------------------
