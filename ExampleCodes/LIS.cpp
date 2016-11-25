@@ -25,5 +25,6 @@ int main(){
             m-=1;
         }
     for(int i=ans.size()-1; i>=0; i--) printf("%d ",ans[i]);
+    printf("\n");
     return 0;
 }

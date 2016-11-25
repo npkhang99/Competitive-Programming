@@ -5,7 +5,7 @@
 #include <algorithm>
 using namespace std;
 
-const int MAXD = 1005, DIG = 9, BASE = 1000000000;
+const int MAXD = 1000005, DIG = 9, BASE = 1000000000;
 const unsigned long long BOUND = numeric_limits <unsigned long long> :: max () - (unsigned long long) BASE * BASE;
 
 struct BigInteger{

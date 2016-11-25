@@ -1,5 +1,5 @@
-Const fi='';
-      fo='';
+Const fi='ConvexHull.inp';
+      fo='ConvexHull.out';
 Type diem=Record
         x,y,xx,yy:int64;
         cotg:real;

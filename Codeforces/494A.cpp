@@ -1,30 +1,41 @@
 #include <cstdio>
 #include <cstring>
-#include <stack>
 using namespace std;
 
-int n;
-char st[100009];
-stack s;
+const int N = 100009;
+
+int n, a[N]={};
+char st[N];
 
 int main(){
     scanf("%s",st);
     n = strlen(st);
-    if(n==1 || st[0]=='#'){
+
+    if(st[0] != '(' || st[n-1] == '('){
         printf("-1\n");
         return 0;
     }
 
-    int cnt = 0;
-    for(int i=0; i<n; i++){
-        if(i=='#'){
-            while(i+1<n && st[i+1]==')') i+=1, cnt-=1;
-            if(!cnt){ printf("-1\n"); return 0; }
-            s.push
+    int last = 0;
+    for(int i=1; i<=n; i++){
+        if(st[i-1] == '#'){
+            a[i] = a[i-1] - 1;
+            last = i-1;
+        }else if(st[i-1] == ')') a[i] = a[i-1] - 1;
+        else a[i] = a[i-1] + 1;
+        if(a[i] < 0){
+            printf("-1\n");
+            return 0;
         }
-        if(i==')') cnt-=1;
-        else if(i=='(') cnt+=1;
-        if(cnt<0){ printf("-1\n"); return 0; }
     }
+
+    for(int i=0; i<n; i++)
+        if(st[i] == '#' && i == last){
+            if(a[i] - a[n] - 1 < 0){
+                printf("-1\n");
+                return 0;
+            }
+            printf("%d\n",a[n]+1);
+        }else if(st[i] == '#') printf("1\n");
     return 0;
 }
