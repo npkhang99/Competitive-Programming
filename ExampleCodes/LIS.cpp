@@ -1,6 +1,5 @@
 // Finding LIS (Longest Increasing Subsequence) with O(n log n) time complexity
-#include <iostream>        // cin
-#include <stdio.h>         // printf
+#include <iostream>        // cin cout
 #include <algorithm>       // lower_bound max
 #include <vector>          // vector
 using namespace std;
@@ -18,13 +17,13 @@ int main(){
         m = max(m,L[i]);
         b[L[i]] = a[i];
     }
-    printf("%d\n",m);
+    cout<< m<< endl;
     for(int i=n; i>0; i--)
         if(L[i]==m){
             ans.push_back(a[i]);
             m-=1;
         }
-    for(int i=ans.size()-1; i>=0; i--) printf("%d ",ans[i]);
-    printf("\n");
+    for(int i=ans.size()-1; i>=0; i--) cout<< ans[i]<< " ";
+    cout<< endl;
     return 0;
 }

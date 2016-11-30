@@ -116,6 +116,6 @@ int main(){
     b.reset();
     if(n <= 20) subtask1(0,b,0,sum);
     else if(n <= 40) subtask2();
-    else subtask3(0,0,0);
+    else if(n <= 80) subtask3(0,0,0);
     return 0;
 }

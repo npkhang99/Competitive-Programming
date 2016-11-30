@@ -57,19 +57,17 @@ void subtask2(){
         e[y].set(x);
     }
 
-    int cnt = n;
     for(int i=0; i<n; i++)
         if(!d.test(i)){
             for(int j=0; j<n; j++)
                 if(i!=j && !d.test(j) && !e[i].test(j)){
                     d.set(i);
                     d.set(j);
-                    cnt-=2;
                     break;
                 }
         }
 
-    cnt = 0;
+    int cnt = 0;
     for(int i=0; i<n; i++){
         if(!d.test(i)){
             printf("%d ",i+1);
