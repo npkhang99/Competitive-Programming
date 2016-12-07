@@ -7,8 +7,8 @@ typedef pair<ll,ll> ii;
 
 const int N = 500009;
 
-int n, k, c[N]={}, b[N]={};
-long long memo[N]={}, temp[N]={};
+int n, k, c[N]={}, b[N]={}, _b[N]={};
+long long dist[N]={};
 ii pr[N]={}, tr[N]={};
 vector<ii> a[N], g[N], t;
 
@@ -32,11 +32,6 @@ void trace(int v){
     trace(u);
 }
 
-long long dist(int u){
-    if(memo[u] != -1) return memo[u];
-    return memo[u] = dist(pr[u].first) + pr[u].second;
-}
-
 void tracePath(ii i){
     if(tr[i.first].first > 0) tracePath(tr[i.first]);
     t.push_back(ii(i.first,i.second));
@@ -50,7 +45,6 @@ void bfs(int s, int l){
     while(!q.empty()){
         int u = q.front().first, du = q.front().second; q.pop();
         if(du > temp) last = u, temp = du;
-        // if(tr[u] > 0) continue;
         for(int i=0; i<g[u].size(); i++){
             int v = g[u][i].first;
             if(!tr[v].first){
@@ -64,9 +58,17 @@ void bfs(int s, int l){
     else bfs(last,s);
 }
 
+void dfs(int u, long long d){
+    dist[u] = d;
+    for(int i=0; i<g[u].size(); i++){
+        int v = g[u][i].first;
+        if(dist[v] == -1) dfs(v,d+g[u][i].second);
+    }
+}
+
 int main(){
-    freopen("KAMP03.inp","r",stdin);
-    freopen("KAMP03.out","w",stdout);
+    // freopen("KAMP03.inp","r",stdin);
+    // freopen("KAMP03.out","w",stdout);
     scanf("%d%d",&n,&k);
     for(int i=1; i<n; i++){
         int x, y, v; scanf("%d%d%d",&x,&y,&v);
@@ -78,34 +80,24 @@ int main(){
 
     DFS(c[0]);
     memset(b, false, sizeof b);
-    memset(memo, -1, sizeof memo);
+    memset(dist, -1, sizeof dist);
     b[c[0]] = true;
     for(int i=1; i<k; i++)
         trace(c[i]);
 
-    // for(int i=1; i<=n; i++){
-    //     fprintf(stderr,"%d - %7s -", i, b[i]? "Pick":"No pick");
-    //     for(int j=0; j<g[i].size(); j++)
-    //         fprintf(stderr," (%d - %d)", g[i][j].first, g[i][j].second);
-    //     fprintf(stderr, "\n");
-    // }
-    // fprintf(stderr, "\n");
-    bfs(c[0],0);
+   bfs(c[0],0);
 
-    // for(int i=0; i<t.size(); i++)
-    //     fprintf(stderr, "(%d - %d)%c", t[i].first, t[i].second, i == t.size()-1? '\n':' ');
-
+   dist[t[0].first] = t.back().second;
     for(int i=1; i<t.size(); i++)
-        temp[i] = temp[i-1] + t[i].second;
-
-    memo[t[0].first] = t.back().second;
-    for(int i=1; i<t.size(); i++)
-        memo[t[i].first] = max(t[i].second, t.back().second - temp[i]);
+        dist[t[i].first] = max(t[i].second, t.back().second - t[i].second);
 
     for(int i=1; i<=n; i++)
-        if(!b[i]) memo[i] = 0;
+        if(!b[i]) dist[i] = 0;
+
+    for(int i=0; i<t.size(); i++)
+        dfs(t[i].first,dist[t[i].first]);
 
     for(int i=1; i<=n; i++)
-        printf("%lld\n",dist(i));
+        printf("%lld\n",dist[i]);
     return 0;
 }

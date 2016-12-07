@@ -44,4 +44,4 @@ begin
     input;
     finddiff(1,n,maxd,mind,diff);
     output;
-end.
+END.

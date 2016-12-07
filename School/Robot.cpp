@@ -1,68 +1,68 @@
-#include <cstdio>
-#include <iostream>
-#include <queue>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-typedef pair<int,int> ii;
-typedef pair<int,ii> iii;
+const int N = 3e5 + 9;
 
-#define x first
-#define y second
+int n, m, x[N]={}, y[N]={}, c_x = 0, c_y = 0;
+char s[N]={};
 
-const int N=1509;
-const int dx[] = {-1,0,1,0};
-const int dy[] = {0,1,0,-1};
+void move(int& x, int& y, char ch){
+    if(ch == 'S') y++;
+    else if(ch == 'J') y--;
+    else if(ch == 'I') x++;
+    else x--;
+}
 
-int n, a[N][N]={}, d[N][N]={};
-ii s, t;
-
-ii find(int x, int flag){
-    if(flag){
-        for(int i=n-1; i>=0; i--)
-            if(!a[x][i]) return ii(x,i);
-        return ii(-1,-1);
-    }
+long long complete(){
+    long long dist = 0;
     for(int i=0; i<n; i++)
-        if(!a[x][i]) return ii(x,i);
-    return ii(-1,-1);
+        dist += abs(c_x - x[i]) + abs(c_y - y[i]);
+    return dist;
 }
 
-int canGo(int u, int v){
-    return 0 <= u && u < n && 0 <= v && v < n && a[u][v] == 0;
+long long vertical(int factor){
+    int p = (factor == 1? lower_bound(y, y+n+1, c_y):upper_bound(y, y+n+1, c_y)) - y;
+    // cerr<< p<< " ";
+    return (n-p - p)*factor;
 }
 
-void BFS(){
-    priority_queue<iii, vector<iii>, greater<iii> > q;
-    q.push(iii(0,s)); d[s.x][s.y] = 0;
-    while(!q.empty()){
-        int du = q.top().first;
-        ii u = q.top().second;
-        q.pop();
-        if(u == t) break;
-        if(du > d[u.x][u.y]) continue;
-        for(int i=0; i<4; i++){
-            ii v = ii(u.x+dx[i], u.y+dy[i]);
-            if(canGo(v.x,v.y) && d[u.x][u.y] + 1 < d[v.x][v.y])
-                d[v.x][v.y] = d[u.x][u.y]+1, q.push(iii(d[v.x][v.y],v));
-        }
-    }
-    cout<< (d[t.x][t.y] == 10E8? -1:d[t.x][t.y])<< '\n';
+long long horizontal(int factor){
+    int p = (factor == 1? lower_bound(x, x+n+1, c_x):upper_bound(x, x+n+1, c_x)) - x;
+    // cerr<< p<< " ";
+    return (n-p - p)*factor;
 }
 
 int main(){
-    ios::sync_with_stdio(false); cin.tie(0);
     // freopen("Robot.inp","r",stdin);
     // freopen("Robot.out","w",stdout);
-    cin>> n;
-    for(int i=0; i<n; i++) for(int j=0; j<n; j++) cin>> a[i][j], d[i][j] = 10E8;
-
-    s = find(0,0);
-    t = find(n-1,1);
-    if(s == ii(-1,-1) || t == ii(-1,-1)){
-        cout<< "-1\n";
-        return 0;
+    scanf("%d %d",&n,&m);
+    for(int i=0; i<n; i++)
+        scanf("%d %d ",&x[i],&y[i]);
+    scanf("%s",s);
+    
+    long long dist = 0;
+    c_x = c_y = 0;
+    for(int i=0; i<n; i++)
+        dist += abs(x[i]) + abs(y[i]);
+    sort(x, x+n);
+    sort(y, y+n);
+    x[n] = y[n] = 1000009;
+    // cerr<< "Initial distance: "<< dist<< endl;
+    for(int i=0; i<m; i++){
+        // cerr<< c_x<< " "<< c_y<< " -> ";
+        // fprintf(stderr, "%3d%3d -> ", c_x,c_y);
+        
+        // fprintf(stderr, "%3d%3d - ", c_x,c_y);
+        if(s[i] == 'I' || s[i] == 'Z')
+            // cerr<< "Goes horizontal - ",
+            dist += horizontal(s[i] == 'I'? -1:1);
+        else
+            // cerr<< "Goes vertical   - ",
+            dist += vertical(s[i] == 'S'? -1:1);
+        move(c_x,c_y,s[i]);
+        // fprintf(stderr, "%3lld - ", complete());
+        printf("%lld\n",dist);
     }
-    BFS();
+    // cerr<< endl;
     return 0;
 }

@@ -1,5 +1,4 @@
-#include <iostream>
-#include <stdio.h>
+#include <cstdio>
 using namespace std;
 
 int min(int a, int b){ return (a<b)?a:b; }
@@ -23,18 +22,17 @@ void floyd(){
 }
 
 int main(){
-    ios::sync_with_stdio(false); cin.tie(0);
-    int x,y;
-    while(cin>> n){
+    int x, y;
+    while(~scanf("%d",&n)){
         init();
         for(int i=0; i<n; i++){
-            cin>> x; x-=1;
+            scanf("%d",&x); x-=1;
             a[x][0] = a[0][x] = 1;
         }
         for(int i=1; i<19; i++){
-            cin>> n;
+            scanf("%d",&n);
             for(int j=0; j<n; j++){
-                cin>> x; x-=1;
+                scanf("%d",&x); x-=1;
                 a[x][i] = a[i][x] = 1;
             }
         }
@@ -42,9 +40,9 @@ int main(){
         floyd();
         
         printf("Test Set #%d\n",++T);
-        cin>> n;
+        scanf("%d",&n);
         for(int i=0; i<n; i++){
-            cin>> x>> y;
+            scanf("%d%d",&x,&y);
             printf("%2d to %2d: %d\n",x,y,a[x-1][y-1]);
         }
         printf("\n");

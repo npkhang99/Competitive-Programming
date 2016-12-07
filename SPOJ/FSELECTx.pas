@@ -134,4 +134,4 @@ begin
   INPUT;
   solve;
   OUTPUT;
-end.
+END.

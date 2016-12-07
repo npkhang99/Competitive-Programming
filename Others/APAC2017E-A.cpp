@@ -1,3 +1,4 @@
+// Google CodeJam
 #include <cstdio>
 #include <cmath>
 #include <cstring>
