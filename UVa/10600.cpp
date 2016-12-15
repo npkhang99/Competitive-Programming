@@ -18,7 +18,7 @@ int findRoot(int p){
     return root[p]==p? p:(root[p] = findRoot(root[p]));
 }
 
-void joint(int p, int q){
+void join(int p, int q){
     root[findRoot(p)] = findRoot(q);
 }
 
@@ -46,7 +46,7 @@ int main(){
         int ans1 = 0, ans2 = 10E8;
         for(int i=0; i<m; i++)
             if(findRoot(a[i].u) != findRoot(a[i].v)){
-                joint(a[i].u,a[i].v);
+                join(a[i].u,a[i].v);
                 ans1+=a[i].val;
                 b[i] = 1;
             }
@@ -57,7 +57,7 @@ int main(){
             resetRoot();
             for(int i=0; i<m; i++)
                 if(i!=j && findRoot(a[i].u) != findRoot(a[i].v)){
-                    joint(a[i].u,a[i].v);
+                    join(a[i].u,a[i].v);
                     t+=a[i].val;
                     find+=1;
                 }

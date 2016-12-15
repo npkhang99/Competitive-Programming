@@ -1,4 +1,4 @@
-// Finding Minimum Spanning Tree Using DSUF (Disjoint Set Union-Find data structure)
+// Finding Minimum Spanning Tree Using DSUF (Disjoin Set Union-Find)
 // http://vn.spoj.com/problems/QBMST/
 #include <stdio.h>         // scanf printf
 #include <algorithm>       // sort
@@ -17,7 +17,7 @@ int findRoot(int p){
     else return parent[p] = findRoot(parent[p]);
 }
 
-void joint(int p, int q){
+void join(int p, int q){
     parent[findRoot(p)] = findRoot(q);
 }
 
@@ -30,7 +30,7 @@ int kruskal(){
     for(int i=0; i<=n; i++) parent[i] = i;
     for(int i=0; i<m; i++)
         if(findRoot(a[i].u) != findRoot(a[i].v)){
-            joint(a[i].u,a[i].v);
+            join(a[i].u,a[i].v);
             ans+=a[i].val;
         }
     return ans;

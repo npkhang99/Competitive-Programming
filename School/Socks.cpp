@@ -12,7 +12,7 @@ map<int,int> cnt;
 
 int root(int p){ return p==par[p]? p:root(par[p]); }
 
-void joint(int p, int q){
+void join(int p, int q){
     int x = root(p), y = root(q);
     if(x == y) return;
     if(Rank[x] > Rank[y]) par[y] = x;
@@ -41,7 +41,7 @@ int main(){
     for(int i=1; i<=n; i++) par[i] = i;
     for(int i=0; i<m; i++){
         int x, y; scanf("%d%d",&x,&y);
-        joint(x,y); use[x] = use[y] = 1;
+        join(x,y); use[x] = use[y] = 1;
     }
 
     for(int i=1; i<=n; i++)

@@ -40,7 +40,7 @@ int root(int p){
     return parent[p]==p? p:root(parent[p]);
 }
 
-void joint(int p, int q){
+void join(int p, int q){
     parent[root(p)] = root(q);
 }
 
@@ -52,7 +52,7 @@ void kruskal(){
     for(int i=0; i<=n; i++) parent[i] = i;
     for(int i=0,cnt=0; i<k; i++)
         if(root(a[i].u) != root(a[i].v)){
-            joint(a[i].u,a[i].v);
+            join(a[i].u,a[i].v);
             ans+=a[i].val; cnt+=1;
             if(cnt==n-1) break;
         }

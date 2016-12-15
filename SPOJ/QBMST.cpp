@@ -1,7 +1,6 @@
 // SPOJ submission 17415876 (C++ 5) plaintext list. Status: AC, problem QBMST, contest SPOJVN. By mansblacks (Khang), 2016-08-02 06:21:07.
-#include <iostream>        //
-#include <stdio.h>        // scanf printf
-#include <algorithm>    // sort
+#include <stdio.h>         // scanf printf
+#include <algorithm>       // sort
 using namespace std;
 
 const int N=100009;
@@ -17,7 +16,7 @@ int findRoot(int p){
     else return root[p] = findRoot(root[p]);
 }
 
-void joint(int p, int q){
+void join(int p, int q){
     root[findRoot(p)] = findRoot(q);
 }
 
@@ -30,7 +29,7 @@ int kruskal(){
     for(int i=0; i<n; i++) root[i] = i;
     for(int i=0; i<m; i++)
         if(findRoot(a[i].u) != findRoot(a[i].v)){
-            joint(a[i].u,a[i].v);
+            join(a[i].u,a[i].v);
             ans+=a[i].val;
         }
     return ans;
