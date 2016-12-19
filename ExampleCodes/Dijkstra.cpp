@@ -1,20 +1,21 @@
-// Dijkstra algorithm - Finding Shortest Path from S to T using heap (priority_queue)
-#include <iostream>
-#include <stdio.h>
+// Dijkstra's algorithm - Finding Single-Source Shortest Path from S to T using priority queue
+// Time complexity: O((V+E) log V)
+// NOTE: This Dijkstra's variant can cause duplicate items in the priority queue
+#include <cstdio>
 #include <queue>
 #include <vector>
 using namespace std;
 
 typedef pair<int,int> ii;
 
-const int N=100009;
+const int N = 100009;
+const int INF = (int)1e9;
 
-int n, m, b[N]={}, tr[N]={};
-vector<ii> a[N];
-long long d[N]={};
+int n, m, s, t, dist[N]={};
+vector<ii> a[N];            // AdjList: (outgoing edge, cost)
 
 void doc(){
-    scanf("%d%d",&n,&m);
+    scanf("%d%d%d%d",&n,&m,&s,&t);
     for(int i=0; i<m; i++){
         int x,y,val; scanf("%d%d%d",&x,&y,&val);
         a[x].push_back(ii(y,val));
@@ -22,37 +23,31 @@ void doc(){
     }
 }
 
-void trace(int u){
-    if(u==0) return;
-    trace(tr[u]);
-    printf("%d ",u);
-}
-
 void dijkstra(int s, int t){
     priority_queue<ii, vector<ii>, greater<ii> > pq;
-    for(int i=1; i<=n; i++) d[i] = 10E17;
-    d[1] = 0;
-    pq.push(ii(0,s));
-    while(!pq.empty() && pq.top().second != t){
-        int u = pq.top().second, du = pq.top().first; pq.pop();
-        if(b[u]) continue;
-        b[u] = 1;
-        for(int i=0; i<a[u].size(); i++){
-            int v = a[u][i].first, val = a[u][i].second;
-            if(b[v]) continue;
-            if(du + val < d[v]){
-                d[v] = du+val;
-                tr[v] = u;
-                pq.push(ii(d[v],v));
+    for(int i=1; i<=n; i++) dist[i] = INF;
+    dist[s] = 0;
+
+    pq.push(ii(0,s));                               // starting from s with 0 initial cost
+    while(!pq.empty()){                             // main loop
+        ii front = pq.top(); pq.pop();              // greedy move
+        int u = front.second, d = front.first;
+        if(d > dist[u]) continue;                   // important!!!
+        for(int i=0; i<a[u].size(); i++){           // all outgoing edges from u
+            int v = a[u][i].first, cost = a[u][i].second;
+            if(d + cost < dist[v]){
+                dist[v] = d + cost;                  // relax operation
+                pq.push(ii(dist[v],v));
             }
         }
     }
-    if(!b[t] && pq.empty()) printf("-1\n");
-    else trace(n);
+
+    if(dist[t] != INF) printf("%d\n",dist[t]);
+    else printf("-1\n");
 }
 
 int main(){
     doc();
-    dijkstra();
+    dijkstra(s,t);
     return 0;
 }
