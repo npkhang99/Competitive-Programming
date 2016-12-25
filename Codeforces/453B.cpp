@@ -35,7 +35,7 @@ void xuly(){
     int sum=10E8, m=0;
     for(int mask=0; mask<(1<<17); mask++)
         sum = (sum>dp[n][mask])?(m = mask, dp[n][mask]):sum;
-    // back trace
+    // trace back
     for(int i=n; i>0; i--)
         for(int x=0; x<61; x++)
             if((fact[x] | m) == m && dp[i-1][m-fact[x]]+abs(a[i]-x) == dp[i][m]){

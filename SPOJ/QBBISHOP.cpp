@@ -42,6 +42,12 @@ int main(){
         b[x][y] = true;
     }
 
+    if(!m){
+        if(abs(p-s) == abs(q-t)) printf("1\n");
+        else printf("2\n");
+        return 0;
+    }
+
     BFS();
     printf("%d\n",!a[s][t]? -1:a[s][t]);
     return 0;
