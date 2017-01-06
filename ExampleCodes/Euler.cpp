@@ -1,6 +1,6 @@
-#include <iostream>    // cin
-#include <stdio.h>    // printf
-#include <stack>    // stack push pop top
+#include <iostream>
+#include <stdio.h>
+#include <stack>
 using namespace std;
 
 const int N=1009;

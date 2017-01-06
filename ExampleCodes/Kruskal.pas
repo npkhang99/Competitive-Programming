@@ -1,5 +1,4 @@
 // Finding Minimum Spanning Tree by sorting edges
-// Complexity: O(M x N)
 Const fi='Kruskal.inp';
       maxN=1000;
       maxM=2000;

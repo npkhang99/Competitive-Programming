@@ -1,82 +1,76 @@
-#include <stdio.h>
-#include <algorithm>
-#include <limits.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int N=1009;
-struct diem{
-    int tt, xg, yg;
+const int N = 1009;
+
+#define EPS 1e-9;
+
+struct point{
+    int x, y, id;
+}red[N], green[N];
+
+struct anotherPoint{
+    int id;
     double cotg;
-}r[N], g[N];
+}a[N];
+
 int n;
-//---------------------------------------------------------
-void doc(){
-    // cin>> n;
-    scanf("%d",&n);
-    for(int i=1; i<=n; i++){
-        // cin>> g[i].xg>> g[i].yg;
-        scanf("%d%d",&g[i].xg,&g[i].yg);
-        g[i].tt=i;
-    }
-    for(int i=1; i<=n; i++){
-        // cin>> r[i].xg>> r[i].yg;
-        scanf("%d%d",&r[i].xg,&r[i].yg);
-        r[i].tt=i+n;
-    }
+
+bool comp(anotherPoint a, anotherPoint b){
+    return a.cotg < b.cotg;
 }
-//---------------------------------------------------------
-int comp(diem a, diem b){
-    return a.cotg<b.cotg;
+
+bool equal(double a, double b){
+    return fabs(a - b) < EPS;
 }
-//---------------------------------------------------------
-void doitruc(int i, bool xanh){
-    int x, y;
-    if(xanh){
-        for(int j=1; j<=n; j++){
-            x=r[j].xg-g[i].xg;
-            y=r[j].yg-g[i].yg;
-            if(y==0 && x>0) r[j].cotg=INT_MAX;
-            else if(y==0 && x<0) r[j].cotg=INT_MIN;
-            else r[j].cotg=x/y;
-        }
-    }else{
-        for(int j=1; j<=n; j++){
-            x=g[j].xg-r[i].xg;
-            y=g[j].yg-r[i].yg;
-            if(y==0 && x>0) g[j].cotg=INT_MAX;
-            else if(y==0 && x<0) g[j].cotg=INT_MIN;
-            else g[j].cotg=x/y;
-        }
-    }
-}
-//---------------------------------------------------------
-void xuly(){
-    for(int i=1; i<=n; i++){
-        doitruc(i,1);
-        sort(r+1,r+n+1,comp);
-        for(int j=2; j<=n; j++)
-            if(r[j].cotg==r[j-1].cotg){
-                // cout<< g[i].tt<< " "<< r[j-1].tt<< " "<< r[j].tt<< '\n';
-                printf("%d %d %d\n",g[i].tt, r[j-1].tt, r[j].tt);
-                return;
-            }
-    }
-    for(int i=1; i<=n; i++){
-        doitruc(i,0);
-        sort(g+1,g+n+1,comp);
-        for(int j=2; j<=n; j++)
-            if(g[j].cotg==g[j-1].cotg){
-                // cout<< r[i].tt<< " "<< g[j-1].tt<< " "<< g[j].tt<< '\n';
-                printf("%d %d %d\n",r[i].tt, g[j-1].tt, g[j].tt);
-                return;
-            }
-    }
-    // cout<< "-1";
-    printf("-1\n");
-}
-//---------------------------------------------------------
+
 int main(){
-    doc();
-    xuly();
+    scanf("%d",&n);
+    for(int i=0; i<n; i++){
+        scanf("%d%d", &green[i].x, &green[i].y);
+        green[i].id = i+1;
+    }
+    for(int i=0; i<n; i++){
+        scanf("%d%d", &red[i].x, &red[i].y);
+        red[i].id = i+n+1;
+    }
+
+    for(int k=0; k<n; k++){
+        for(int i=0; i<n; i++){
+            int x = red[i].x - green[k].x,
+                y = red[i].y - green[k].y;
+            a[i].id = red[i].id;
+            if(y == 0) a[i].cotg = DBL_MAX;
+            else a[i].cotg = x / y;
+        }
+
+        sort(a,a+n,comp);
+
+        for(int i=0; i<n-1; i++)
+            if(equal(a[i].cotg, a[i+1].cotg)){
+                printf("%d %d %d\n", green[k].id, a[i].id, a[i+1].id);
+                return 0;
+            }
+    }
+
+    for(int k=0; k<n; k++){
+        for(int i=0; i<n; i++){
+            int x = green[i].x - red[k].x,
+                y = green[i].y - red[k].y;
+            a[i].id = green[i].id;
+            if(y == 0) a[i].cotg = DBL_MAX;
+            else a[i].cotg = x / y;
+        }
+
+        sort(a,a+n,comp);
+
+        for(int i=0; i<n-1; i++)
+            if(equal(a[i].cotg, a[i+1].cotg)){
+                printf("%d %d %d\n", red[k].id, a[i].id, a[i+1].id);
+                return 0;
+            }
+    }
+
+    printf("-1\n");
     return 0;
 }

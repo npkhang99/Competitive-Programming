@@ -1,6 +1,6 @@
-// Z-Function of String Matching
+// Z-Function - string matching
 Uses Math;
-Var z:array[1..1000] of longint;
+Var z:array[1..2000000] of longint;
     s,t,x:ansistring;
     i,n:longint;
 //---------------------------------------------------------

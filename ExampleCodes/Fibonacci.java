@@ -1,4 +1,4 @@
-// Calculate the n-th fibonacci number using matrix multiplication - O(log2 n)
+// Calculate the n-th fibonacci number using matrix multiplication - O(log n)
 import java.util.*;
 
 class Main {

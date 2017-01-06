@@ -1,6 +1,6 @@
 #include <iostream>    // cin cout
-#include <stdio.h>    // freopen
-#include <queue>    // queue push pop top
+#include <stdio.h>     // freopen
+#include <queue>       // queue push pop top
 #define fi "BFS.inp"
 using namespace std;
 

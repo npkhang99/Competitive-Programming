@@ -10,13 +10,13 @@ struct Edge{
     long long val;
 }a[4*N];
 
-int n, k=0, parent[N]={};
+int n, k=0, parent[N]={}, ranking[N]={};
 lli x[N],y[N],z[N];
 
 void doc(){
-    cin>> n;
+    scanf("%d",&n);
     for(int i=0; i<n; i++){
-        cin>> x[i].first>> y[i].first>> z[i].first;
+        scanf("%d%d%d", &x[i].first, &y[i].first, &z[i].first);
         x[i].second = y[i].second = z[i].second = i;
     }
 }
@@ -41,7 +41,13 @@ int root(int p){
 }
 
 void join(int p, int q){
-    parent[root(p)] = root(q);
+    p = root(p);
+    q = root(q);
+    if(p == q) return;
+    if(ranking[p] <= ranking[q]){
+        parent[p] = q;
+        if(ranking[p] == ranking[q]) ranking[p]++;
+    }else parent[q] = p;
 }
 
 int comp(Edge a, Edge b){ return a.val<b.val; }
@@ -65,7 +71,6 @@ void xuly(){
 }
 
 int main(){
-    ios::sync_with_stdio(false);
     doc();
     xuly();
     return 0;
