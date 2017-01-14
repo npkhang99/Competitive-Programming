@@ -1,2 +1,0 @@
-#I FUCKING HATE THIS JUDGE
-print('25')
