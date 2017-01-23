@@ -52,9 +52,10 @@ int main(){
         int ans = 10E8;
         vector<int> trace;
         for(int i=0; i<n; i++)
-            if(ans > dp[i][m-1] || (ans == dp[i][m-1] && lexicographical_compare(all(tr[i][m-1]),all(trace))))
-                ans = dp[i][m-1],
+            if(ans > dp[i][m-1] || (ans == dp[i][m-1] && lexicographical_compare(all(tr[i][m-1]),all(trace)))){
+                ans = dp[i][m-1];
                 trace = tr[i][m-1];
+            }
         for(int i=0; i<m; i++)
             printf("%d%c", trace[i]+1, i==m-1? '\n':' ');
         printf("%d\n",ans);

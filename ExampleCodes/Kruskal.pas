@@ -1,4 +1,4 @@
-// Finding Minimum Spanning Tree by sorting edges
+// Finding Minimum Spanning Tree
 Const fi='Kruskal.inp';
       maxN=1000;
       maxM=2000;
