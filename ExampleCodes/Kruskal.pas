@@ -1,4 +1,5 @@
 // Finding Minimum Spanning Tree
+// Worst case runtime: O(VE)
 Const fi='Kruskal.inp';
       maxN=1000;
       maxM=2000;

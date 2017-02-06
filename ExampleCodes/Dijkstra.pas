@@ -1,3 +1,4 @@
+// Naive Dijkstra's algorithm
 Const fi='Dijkstra.inp';
       fo='';
       infty=maxint;

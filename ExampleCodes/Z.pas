@@ -1,4 +1,5 @@
-// Z-Function - string matching
+// Z-Function - A String Matching Algorithm
+// Time complexity: O(n + m)
 Uses Math;
 Var z:array[1..2000000] of longint;
     s,t,x:ansistring;

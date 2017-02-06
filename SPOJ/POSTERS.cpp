@@ -12,10 +12,11 @@ const int N=40009;
 int n, m=0, _m=10E8, b[N]={};
 map<int,vector<int> > a;
 
+// solution 1 - AC - time: 1.02
 void doc(){
-    cin>> n;
+    scanf("%d",&n);
     for(int i=0; i<n; i++){
-        int x,y; cin>> x>> y;
+        int x,y; scanf("%d%d",&x,&y);
         a[x].push_back(i+1);
         a[y+1].push_back(-i-1);
         m=max(m,y); _m=min(_m,x);
@@ -41,13 +42,17 @@ void xuly(){
     printf("%d\n",ans);
 }
 
-int main(){
+void almostBruteForce(){
     int t;
-    cin>> t;
+    scanf("%d",&t);
     for(int _=0; _<t; _++){
         doc();
         xuly();
         a.clear();
     }
+}
+
+int main(){
+    almostBruteForce();
     return 0;
 }

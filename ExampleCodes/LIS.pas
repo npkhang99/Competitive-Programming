@@ -1,4 +1,5 @@
-// Longest Increasing Subsequence with O(n log n) time complexity
+// Finding LIS (Longest Increasing Subsequence)
+// Time complexity: O(N log K) with K is the length of the LIS (output sensitive)
 Const fi='';
 {
 Sample test case:

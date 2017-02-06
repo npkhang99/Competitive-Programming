@@ -1,4 +1,5 @@
-// KMP algorithm - string matching
+// KMP algorithm - A String Matching Algorithm
+// Time complexity: O(n + m)
 #include <cstdio>
 #include <cstring>
 using namespace std;

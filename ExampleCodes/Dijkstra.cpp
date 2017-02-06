@@ -1,6 +1,6 @@
-// Dijkstra's algorithm - Finding Single-Source Shortest Path from S to T using priority queue
+// Dijkstra's algorithm - Finding Single-Source Shortest Path from S to T using a priority queue (heap)
 // Time complexity: O((V+E) log V)
-// NOTE: This Dijkstra's variant can cause duplicate items in the priority queue
+// NOTE: There are a lot of Dijkstra's variant. This variant can cause duplicate items in the priority queue
 #include <cstdio>
 #include <queue>
 #include <vector>

@@ -1,4 +1,5 @@
 // Finding Minimum Spanning Tree Using DSUF (Disjoin Set Union-Find)
+// Overall Runtime: O(E log V)
 // http://vn.spoj.com/problems/QBMST/
 #include <stdio.h>         // scanf printf
 #include <algorithm>       // sort

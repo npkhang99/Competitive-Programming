@@ -7,7 +7,7 @@ const int N=100009;
 int n, m;
 long long a[N], b[N];
 
-int checkCover(long long x){
+bool checkCover(long long x){
     int i=0, j=0;
     while(i<n && j<m){
         if(b[j]-x<=a[i] && b[j]+x>=a[i]) i+=1;
@@ -16,19 +16,18 @@ int checkCover(long long x){
     return i==n;
 }
 
-int bsearch(long long l, long long r){
-    long long mid = (l+r)/2;
-    int covered = checkCover(mid);
-    // printf("%d %d %d %d\n",l,r,mid,covered);
-    if(l>r) return l;
-    if(covered) return bsearch(l,mid-1);
-    else return bsearch(mid+1,r);
-}
-
 int main(){
     cin>> n>> m;
     for(int i=0; i<n; i++) cin>> a[i];
     for(int i=0; i<m; i++) cin>> b[i];
-    printf("%d\n",bsearch(0,2000000000));
+    long long l = 0, r = 2000000000, ans;
+    while(l <= r){
+        long long mid = (l + r) >> 1;
+        if(checkCover(mid)){
+            ans = mid;
+            r = mid - 1;
+        }else l = mid + 1;
+    }
+    cout<< ans<< endl;
     return 0;
 }
