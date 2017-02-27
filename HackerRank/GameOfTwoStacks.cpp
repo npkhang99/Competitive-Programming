@@ -1,3 +1,4 @@
+// HackerRank - University CodeSprint 2 - Game of Two Stacks
 #include <bits/stdc++.h>
 using namespace std;
 

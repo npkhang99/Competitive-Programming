@@ -6,16 +6,16 @@
 using namespace std;
 
 const int MAXD = 1000005, DIG = 9, BASE = 1000000000;
-const unsigned long long BOUND = numeric_limits <unsigned long long> :: max () - (unsigned long long) BASE * BASE;
+const unsigned long long BOUND = numeric_limits<unsigned long long> :: max() - (unsigned long long) BASE * BASE;
 
 struct BigInteger{
     int D, digits [MAXD / DIG + 2];
 
-    inline void trim (){
+    inline void trim(){
         while (D > 1 && digits [D - 1] == 0) D--;
     }
 
-    inline void init (long long x){
+    inline void init(long long x){
         memset (digits, 0, sizeof (digits));
         D = 0;
         do{ digits [D++] = x % BASE;
@@ -23,11 +23,11 @@ struct BigInteger{
         }while (x > 0);
     }
 
-    inline BigInteger (long long x){ init (x); }
+    inline BigInteger(long long x){ init (x); }
 
-    inline BigInteger (int x = 0){ init (x); }
+    inline BigInteger(int x = 0){ init (x); }
 
-    inline BigInteger (char *s){
+    inline BigInteger(char *s){
         memset(digits, 0, sizeof (digits));
         int len = strlen (s), first = (len + DIG - 1) % DIG + 1;
         D = (len + DIG - 1) / DIG;
@@ -39,7 +39,7 @@ struct BigInteger{
         trim();
     }
 
-    inline char *str (){
+    inline char *str(){
         trim ();
         char *buf = new char [DIG * D + 1];
         int pos = 0, d = digits [D - 1];
@@ -56,9 +56,9 @@ struct BigInteger{
         return buf;
     }
 
-    inline char *to_string (){ return str(); }
+    inline string to_string(){ return string(str()); }
 
-    inline bool operator < (const BigInteger &o) const{
+    inline bool operator <(const BigInteger &o) const{
         if (D != o.D)
             return D < o.D;
         for (int i = D - 1; i >= 0; i--)
@@ -67,7 +67,7 @@ struct BigInteger{
         return false;
     }
 
-    inline bool operator == (const BigInteger &o) const{
+    inline bool operator ==(const BigInteger &o) const{
         if (D != o.D)
             return false;
         for (int i = 0; i < D; i++)
@@ -76,7 +76,7 @@ struct BigInteger{
         return true;
     }
 
-    inline BigInteger operator << (int p) const{
+    inline BigInteger operator <<(int p) const{
         BigInteger temp;
         temp.D = D + p;
         for (int i = 0; i < D; i++)
@@ -86,7 +86,7 @@ struct BigInteger{
         return temp;
     }
 
-    inline BigInteger operator >> (int p) const{
+    inline BigInteger operator >>(int p) const{
         BigInteger temp;
         temp.D = D - p;
         for (int i = 0; i < D - p; i++)
@@ -96,14 +96,14 @@ struct BigInteger{
         return temp;
     }
 
-    inline BigInteger range (int a, int b) const{
+    inline BigInteger range(int a, int b) const{
         BigInteger temp = 0; temp.D = b - a;
         for (int i = 0; i < temp.D; i++)
             temp.digits [i] = digits [i + a];
         return temp;
     }
 
-    inline BigInteger operator + (const BigInteger &o) const{
+    inline BigInteger operator +(const BigInteger &o) const{
         BigInteger sum = o;
         int carry = 0;
         for (sum.D = 0; sum.D < D || carry > 0; sum.D++){
@@ -117,7 +117,7 @@ struct BigInteger{
         return sum;
     }
 
-    inline BigInteger operator - (const BigInteger &o) const{
+    inline BigInteger operator -(const BigInteger &o) const{
         BigInteger diff = *this;
         for (int i = 0, carry = 0; i < o.D || carry > 0; i++){
             diff.digits [i] -= (i < o.D ? o.digits [i] : 0) + carry;
@@ -130,7 +130,7 @@ struct BigInteger{
         return diff;
     }
 
-    inline BigInteger operator * (const BigInteger &o) const{
+    inline BigInteger operator *(const BigInteger &o) const{
         BigInteger prod = 0;
         unsigned long long sum = 0, carry = 0;
         for (prod.D = 0; prod.D < D + o.D - 1 || carry > 0; prod.D++){
@@ -149,7 +149,7 @@ struct BigInteger{
         return prod;
     }
 
-    inline double double_div (const BigInteger &o) const{
+    inline double double_di (const BigInteger &o) const{
         double val = 0, oval = 0;
         int num = 0, onum = 0;
         for (int i = D - 1; i >= max (D - 3, 0); i--, num++)
@@ -159,7 +159,7 @@ struct BigInteger{
         return val / oval * (D - num > o.D - onum ? BASE : 1);
     }
 
-    inline pair <BigInteger, BigInteger> divmod (const BigInteger &o) const{
+    inline pair<BigInteger, BigInteger> divmod(const BigInteger &o) const{
         BigInteger quot = 0, rem = *this, temp;
         for (int i = D - o.D; i >= 0; i--){
             temp = rem.range (i, rem.D);
@@ -184,11 +184,11 @@ struct BigInteger{
         return make_pair (quot, rem);
     }
 
-    inline BigInteger operator / (const BigInteger &o) const{ return divmod (o).first; }
+    inline BigInteger operator /(const BigInteger &o) const{ return divmod (o).first; }
 
-    inline BigInteger operator % (const BigInteger &o) const{ return divmod (o).second; }
+    inline BigInteger operator %(const BigInteger &o) const{ return divmod (o).second; }
 
-    inline BigInteger power (int exp) const{
+    inline BigInteger power(int exp) const{
         BigInteger p = 1, temp = *this;
         while (exp > 0){
             if (exp & 1) p = p * temp;

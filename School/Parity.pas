@@ -1,6 +1,6 @@
 Const fi='Parity.inp';
       fo='Parity.out';
-Var a,L:array[0..100000] of longint;
+Var a,L:array[-1000000..1000000] of longint;
     n:longint;
 //---------------------------------------------------------
 Procedure docfile;
@@ -10,20 +10,29 @@ Procedure docfile;
         assign(f,fi);
         reset(f);
         readln(f,n);
-        L[0]:=0;
         for i:=1 to n do
-            Begin
-                read(f,a[i]);
-                if odd(a[i]) then L[i]:=L[i-1]+1
-                else L[i]:=L[i-1]-1;
-            End;
+            read(f,a[i]);
         close(f);
     End;
 //---------------------------------------------------------
 Procedure xuly;
-    Var
+    Var i,c:longint;
+        ans:int64;
+        f:text;
     Begin
-        
+        assign(f,fo);
+        rewrite(f);
+        fillchar(L, sizeof(L), 0);
+        c:=0; L[0]:=1; ans := 0;
+        for i:=1 to n do
+            Begin
+                if odd(a[i]) then inc(c)
+                else dec(c);
+                inc(ans, L[c]);
+                inc(L[c]);
+            End;
+        writeln(f,ans);
+        close(f);
     End;
 //=========================================================
 BEGIN

@@ -1,3 +1,4 @@
+# HackerRank - University CodeSprint 2 - Separate the Numbers
 TC = int(input())
 
 for TEST in range(TC):
