@@ -1,12 +1,13 @@
 (* Thuật toán Kruskal tìm cây khung nhỏ nhất (Minimal Spanning Tree)
  * Độ phức tạp trung bình: O(E log V)
- * http://vn.spoj.com/problems/QBMST/
+ * Code này đã được dùng để nộp một bài trên SPOJ VN: http://vn.spoj.com/problems/QBMST/
+ * Ví dụ nằm trong file `Kruskal.inp'
  * NOTE:
  * - Code này cài đặt bằng cấu trúc dữ liệu Disjoint Set (viết tắt là DSU - quản lý các tập không giao nhau)
  * - Code DSU này được tối ưu bằng rank của cây (chiều cao của cây)
  * - Mảng par[] lưu đỉnh cha của đỉnh tương ứng | par[i] = x : x là cha của i (par = parent)
  ***************************************************************************************************************)
-Const fi='Kruskal.inp';
+Const fi='';
 Type Edge=Record
         u,v,w:longint;
      End;
@@ -104,7 +105,7 @@ Procedure Kruskal;
                     if is_same_set(u,v) then continue; // nếu u và v thuộc cùng 1 cây (chung gốc) thì bỏ qua cạnh này
                     inc(cnt); // tăng số lượng cạnh trong cây khung lên 1
                     inc(ans,w); // tăng trọng số của cây khung lên bằng trọng số của cạnh
-                    join(u,v); // hợp nhất 2 cây chứa u và v
+                    normal_join(u,v); // hợp nhất 2 cây chứa u và v
                     if cnt = n-1 then break; // nếu cây khung đã chứa n-1 cạnh thì thoát
                 End;
         writeln(ans);
