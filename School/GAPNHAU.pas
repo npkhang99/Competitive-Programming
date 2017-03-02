@@ -33,7 +33,7 @@ Procedure xuat(x,y:longint);
         close(f);
    End;
 //------------------------------
-Function Dijsktra(s:longint):longint;
+Function dijkstra(s:longint):longint;
    Var i,u,v,Lmin:longint;
    Begin
         for i:=1 to n do
@@ -55,10 +55,10 @@ Function Dijsktra(s:longint):longint;
                      End;
               C[u]:=true;
         until C[t];
-        Dijsktra:=L[t];
+        dijkstra:=L[t];
    End;
 //==============================
 BEGIN
      docfile;
-     xuat(Dijsktra(s1),Dijsktra(s2));
+     xuat(dijkstra(s1),dijkstra(s2));
 END.

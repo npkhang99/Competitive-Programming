@@ -1,7 +1,7 @@
+// BFS
 #include <iostream>    // cin cout
 #include <stdio.h>     // freopen
 #include <queue>       // queue push pop top
-#define fi "BFS.inp"
 using namespace std;
 
 const int N=100009;
@@ -29,7 +29,7 @@ void BFS(){
 }
 //---------------------------------------------------------
 int main(){
-    freopen(fi,"r",stdin);
+    freopen("BFS.inp", "r", stdin);
     docfile();
     BFS();
     return 0;

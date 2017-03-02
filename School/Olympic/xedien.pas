@@ -34,7 +34,7 @@ Procedure xuat;
         close(f);
    End;
 //-------------------------------
-Procedure Dijsktra;
+Procedure dijkstra;
    Var u,v,i,Lmin:integer;
    Begin
         for i:=1 to n do
@@ -61,7 +61,7 @@ BEGIN
      d:=0;
      for t:=1 to n do
          Begin
-              Dijsktra;
+              dijkstra;
               if 2*L[t]<=K then
                  Begin
                       inc(d);

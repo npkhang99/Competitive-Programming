@@ -44,7 +44,7 @@ Procedure xuat;
         close(f);
     End;
 //------------------------------
-Procedure Dijsktra;
+Procedure dijkstra;
     Var i,u,v,Lmin:integer;
     Begin
         for i:=1 to n do
@@ -55,7 +55,7 @@ Procedure Dijsktra;
         fillchar(c,sizeof(c),false);
         c[s]:=true;
         Repeat
-            u:=0;Lmin:=infty;
+            u:=0; Lmin:=infty;
             for i:=1 to n do
                 if (not c[i]) and (L[i]<Lmin) then
                     Begin
@@ -74,6 +74,6 @@ Procedure Dijsktra;
 //==============================
 BEGIN
     docfile;
-    Dijsktra;
+    dijkstra;
     xuat;
 END.

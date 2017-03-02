@@ -1,9 +1,17 @@
-// Dijkstra's algorithm - Finding Single-Source Shortest Path from S to T using a priority queue (heap)
-// Time complexity: O((V+E) log V)
-// NOTE: There are a lot of Dijkstra's variant, this variant can cause duplicate items in the priority queue
+/* Dijkstra's algorithm - Finding Single-Source Shortest Path from S to T
+ * Time complexity: O((V+E) log V)
+ * Requirements:
+ *  - A graph stored in an Adjacency List (adj)
+ *  - A distance array to record the distance from source to every vertex (dist)
+ *  - A Priority Queue which stores pairs of vertex information and is sorted based on increasing distance from the source, and if tie, by vertex number
+ *
+ * NOTE: There are adj lot of Dijkstra's variant, this variant can cause duplicate items in the priority queue
+ */
+
 #include <cstdio>
 #include <queue>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 typedef pair<int,int> ii;
@@ -12,14 +20,14 @@ const int N = 100009;
 const int INF = (int)1e9;
 
 int n, m, s, t, dist[N]={};
-vector<ii> a[N];            // AdjList: ii(outgoing edge, cost)
+vector<ii> adj[N];            // Adjacency List: ii(outgoing edge, cost)
 
 void doc(){
     scanf("%d%d%d%d",&n,&m,&s,&t);
     for(int i=0; i<m; i++){
         int x,y,val; scanf("%d%d%d",&x,&y,&val);
-        a[x].push_back(ii(y,val));
-        a[y].push_back(ii(x,val));
+        adj[x].push_back(ii(y,val));
+        adj[y].push_back(ii(x,val));
     }
 }
 
@@ -33,9 +41,9 @@ void dijkstra(int s, int t){
         ii front = pq.top(); pq.pop();              // greedy move
         int u = front.second, d = front.first;
         if(d > dist[u]) continue;                   // important!!!
-        for(int i=0; i<a[u].size(); i++){           // all outgoing edges from u
-            int v = a[u][i].first,
-                cost = a[u][i].second;
+        for(int i = 0; i < adj[u].size(); i++){     // all outgoing edges from u
+            int v = adj[u][i].first,
+                cost = adj[u][i].second;
             if(d + cost < dist[v]){
                 dist[v] = d + cost;                 // relax operation
                 pq.push(ii(dist[v],v));

@@ -1,4 +1,6 @@
-Const fi='BinarySearchingTree.inp'; //50 25 75 12 35 60 85 8 18 30 39 55 68
+// 13
+// 50 25 75 12 35 60 85 8 18 30 39 55 68
+Const fi='';
 Type Pnode=^node;
      node=Record
         value:integer;
@@ -19,11 +21,12 @@ Procedure Add(Var T:Pnode; X:integer);
 //---------------------------------------------------------
 Procedure docfile;
     Var f:text;
-        x:integer;
+        x,n,i:integer;
     Begin
         assign(f,fi);
         reset(f);
-        while not eof(f) do
+        readln(f,n);
+        for i:=1 to n do
             Begin
                 read(f,x);
                 Add(T,x);
