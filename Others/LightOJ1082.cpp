@@ -1,4 +1,4 @@
-// LightOJ 1082
+// LightOJ 1082 - Array Queries
 #include <bits/stdc++.h>
 using namespace std;
 

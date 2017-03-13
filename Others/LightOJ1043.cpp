@@ -1,4 +1,4 @@
-// LightOJ 1043
+// LightOJ 1043 - Triangle Partitioning
 #include <cstdio>
 #include <cmath>
 
