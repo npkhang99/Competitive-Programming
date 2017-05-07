@@ -35,7 +35,7 @@ void spfa(int s, int t){
     queue<int> q;
     for(int i=1; i<=n; i++){
         dist[i] = INF;
-        is_queue[i] = false;
+        in_queue[i] = false;
     }
 
     q.push(s);
@@ -66,4 +66,3 @@ int main(){
     spfa(s,t);
     return 0;
 }
-

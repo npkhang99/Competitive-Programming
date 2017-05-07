@@ -8,7 +8,6 @@ long long a[N]={}, memo[N][N]={}, b[N][N]={};
 
 long long dp(int i, int j){
     if(i == j) return 0;
-    if(i == j+1) return a[i] * a[j];
     if(memo[i][j]!=-1) return memo[i][j];
 
     long long temp = 1e18;
