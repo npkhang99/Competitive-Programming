@@ -1,90 +1,72 @@
-#include <iostream>
-#include <stdio.h>
-#include <math.h>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define Read(a) cin>> a.x>> a.y
+typedef pair<double,double> point;
+typedef pair<int,int> ii;
 
-const int N=100009;
+#define x first
+#define y second
 
-struct point{
-    long double x,y;
-}a[N], adil, bera, bin;
+const int N = 100009;
 
-struct distances{
-    long double val;
-    int index;
-}d[N], da[N], db[N];
+int n;
+double sum = 0;
+point a, b, c, t[N];
 
-int n, b[N]={};
-
-void doc(){
-    Read(adil); Read(bera); Read(bin);
-    cin>> n;
-    for(int i=0; i<n; i++) Read(a[i]);
+double dist(point source, point dest){
+    return sqrt((source.x - dest.x)*(source.x - dest.x) + (source.y - dest.y)*(source.y - dest.y));
 }
 
-long double dist(point a, point b){
-    return sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y));
-}
-
-int comp(distances a, distances b){
-    return a.val<b.val;
-}
-
-void xuly(){
-    int af=0,bf=0;
-    long double ans=0;
-    // calc the distance from starting point
-    // and trash bin to others
-    for(int i=0; i<n; i++){
-        da[i].index = db[i].index = d[i].index = i;
-        // from trash bin
-        d[i].val = dist(bin,a[i])*2;
-        // from starting point
-        da[i].val = dist(adil,a[i]) + dist(bin,a[i]);
-        db[i].val = dist(bera,a[i]) + dist(bin,a[i]);
-    }
-    // sort the distances
-    sort(d,d+n,comp); sort(da,da+n,comp); sort(db,db+n,comp);
+ii find(point a){
+    int f = 0, s = -1;
     for(int i=0; i<n; i++)
-        printf("%.9Lf, %d  --  %.9Lf, %d  --  %.9Lf, %d\n",da[i].val,da[i].index,db[i].val,db[i].index,d[i].val,d[i].index);
-    printf("\n");
-    // do THE job
-    int i=0, j=0, adilStarted=0, beraStarted=0, t=0;
-    while(i!=n && j!=n){
-        long double acost=0, bcost=0, fcost=0;
-        if(!adilStarted) acost=da[i].val;
-        else acost=d[i].val;
-        if(!beraStarted) bcost=db[j].val;
-        else bcost=d[j].val;
-        fcost = min(acost,bcost);
-        ans += fcost;
-        if(fcost==acost){
-            if(!adilStarted){
-                adilStarted=1;
-                i=0;
-                t=da[i].index;
-            }else t=d[i].index;
-            printf("Adil goes to %d, cost %.9Lf -> %.9Lf\n",t,fcost,ans);
-        }else if(fcost==bcost){
-            if(!beraStarted){
-                beraStarted=1;
-                j=0;
-                t=db[j].index;
-            }else t=d[j].index;
-            printf("Bera goes to %d, cost %.9Lf -> %.9Lf\n",t,fcost,ans);
-        }
-        b[t]=1;
-        while(i<n && ((!adilStarted && b[da[i].index]) || (adilStarted && b[d[i].index]))) i++;
-        while(j<n && ((!beraStarted && b[db[j].index]) || (beraStarted && b[d[j].index]))) j++;
+        if(dist(a, t[i]) - dist(t[i], c) < dist(a, t[f]) - dist(t[f], c)) f = i;
+    for(int i=0; i<n; i++)
+        if(f != i && (s == -1 || dist(a, t[i]) - dist(t[i], c) < dist(a, t[s]) - dist(t[s], c))) s = i;
+    return ii(f,s);
+}
+
+double one(){
+    int p = 0;
+    double l1, l2;
+
+    for(int i=0; i<n; i++)
+        if(dist(a,t[i]) - dist(t[i], c) < dist(a,t[p]) - dist(t[p], c)) p = i;
+    l1 = sum + dist(a,t[p]) - dist(c,t[p]);
+
+    for(int i=0; i<n; i++)
+        if(dist(b,t[i]) - dist(t[i], c) < dist(b,t[p]) - dist(t[p], c)) p = i;
+    l2 = sum + dist(b,t[p]) - dist(c,t[p]);
+
+    return min(l1,l2);
+}
+
+double two(){
+    double ret = 1e20;
+    ii opt = find(b);
+    for(int i=0; i<n; i++){
+        int p = (i == opt.first? opt.second : opt.first);
+        double temp = sum + dist(a, t[i]) - dist(t[i], c) + dist(b, t[p]) - dist(t[p], c);
+        ret = min(ret, temp);
     }
-    printf("%.12Lf\n",ans);
+    return ret;
 }
 
 int main(){
-    doc();
-    xuly();
+    while(~scanf("%lf %lf %lf %lf %lf %lf", &a.x, &a.y, &b.x, &b.y, &c.x, &c.y)){
+        scanf("%d", &n);
+        for(int i=0; i<n; i++)
+            scanf("%lf %lf", &t[i].x, &t[i].y);
+
+        sum = 0.0;
+        for(int i=0; i<n; i++)
+            sum += 2.0*dist(c, t[i]);
+
+        double ans = one();
+
+        if(n > 1) ans = min(ans, two());
+
+        printf("%.12lf\n", ans);
+    }
     return 0;
 }
