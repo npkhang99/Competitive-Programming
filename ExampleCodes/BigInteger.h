@@ -149,7 +149,7 @@ struct BigInteger{
         return prod;
     }
 
-    inline double double_di (const BigInteger &o) const{
+    inline double double_div (const BigInteger &o) const{
         double val = 0, oval = 0;
         int num = 0, onum = 0;
         for (int i = D - 1; i >= max (D - 3, 0); i--, num++)

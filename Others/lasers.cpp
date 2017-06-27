@@ -42,6 +42,7 @@ int main() {
             ans = dist[curr];
             break;
         }
+
         if(curr.horizontal == false && curr.val == x2) {
             ans = dist[curr];
             break;
