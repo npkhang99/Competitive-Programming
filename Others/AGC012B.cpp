@@ -1,55 +1,57 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef pair<int,int> ii;
+struct Query {
+    int v, c, d;
+
+    void read() {
+        scanf("%d %d %d", &v, &d, &c);
+    }
+};
 
 const int N = 100009;
 
-int n, m, color[N]={}, b[N]={};
-bool in_queue[N]={};
+int n, m, q, color[N]={}, memo[N]={};
+bool filled[N]={};
+vector<Query> query;
 vector<int> adj[N];
 
-void fill(int x, int d, int c){
-    queue<int> q;
-    q.push(x);
-    b[x] = d; color[x] = c; in_queue[x] = true;
-    while(!q.empty()){
-        int u = q.front(),
-            l = b[u];
-        q.pop();
-        in_queue[u] = false;
-        if(b[u] == 0) continue;
-        for(int v : adj[u]){
-            if(color[v] != c || (color[v] == c && b[v] < l-1)){
-                b[v] = l-1;
-                color[v] = c;
-                if(!in_queue[v]){
-                    q.push(v);
-                    in_queue[v] = true;
-                }
-            }
-        }
+void fill(int u, int d, int c) {
+    if(d < 0 || memo[u] >= d) return;
+
+    memo[u] = d;
+    if(!filled[u]) {
+        color[u] = c;
+        filled[u] = true;
     }
+
+    for(int v : adj[u])
+        fill(v, d-1, c);
 }
 
-int main(){
+int main() {
     scanf("%d %d", &n, &m);
-    for(int i=0; i<m; i++){
+    for(int i = 0; i < m; i++) {
         int x, y; scanf("%d %d", &x, &y);
         adj[x].push_back(y);
         adj[y].push_back(x);
     }
 
-    for(int i=1; i<=n; i++)
-        b[i] = -1;
+    scanf("%d", &q);
+    query.resize(q);
+    for(int i = 0; i < q; i++)
+        query[i].read();
 
-    int Q; scanf("%d", &Q);
-    while(Q--){
-        int x, d, c; scanf("%d %d %d", &x, &d, &c);
-        fill(x,d,c);
+    reverse(query.begin(), query.end());
+    memset(memo, -1, sizeof memo);
+
+    for(Query q : query) {
+        if(memo[q.v] >= q.d) continue;
+        fill(q.v, q.d, q.c);
+        memo[q.v] = q.d;
     }
 
-    for(int i=1; i<=n; i++)
+    for(int i = 1; i <= n; i++)
         printf("%d\n", color[i]);
     return 0;
 }
