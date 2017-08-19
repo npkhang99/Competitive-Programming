@@ -47,7 +47,7 @@ double findNearest(int l, int r){
     merge(l,m,r);
     int k=0;
     for(int i=l; i<=r; i++)
-        if(abs(a[b[i]].x - a[m].x < d)) c[++k]=b[i];
+        if(abs(a[b[i]].x - a[m].x) < d) c[++k]=b[i];
     for(int i=1; i<=k-1; i++){
         int j=i+1;
         while(c[i]!=c[j] && j<=k && abs(a[c[i]].y - a[c[j]].y) < d){

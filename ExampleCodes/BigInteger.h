@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <limits>
+#include <string>
 #include <algorithm>
 using namespace std;
 

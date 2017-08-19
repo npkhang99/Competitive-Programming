@@ -16,7 +16,7 @@ int n, m, a[N]={}, ans[1000009]={}, freq[1000009]={}, BASE;
 vector<Query> q;
 
 bool comp(const Query &a, const Query &b){
-    return a.l / BASE < b.l / BASE || (a.l / BASE == b.l / BASE && a.r > b.r);
+    return a.l / BASE < b.l / BASE || (a.l / BASE == b.l / BASE && a.r < b.r);
 }
 
 int add(int p){
