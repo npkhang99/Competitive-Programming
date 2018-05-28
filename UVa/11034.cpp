@@ -22,12 +22,20 @@ int main(){
         while(!ql.empty() || !qr.empty()){
             int w = 0;
             if(currBank == -1){
-                while(!ql.empty() && ql.front() + w <= l) w += ql.front(), ql.pop();
-                ans += 1, currBank = 1;
+                while(!ql.empty() && ql.front() + w <= l) {
+                    w += ql.front();
+                    ql.pop();
+                }
+                ans += 1;
+                currBank = 1;
                 continue;
             }
-            while(!qr.empty() && qr.front() + w <= l) w += qr.front(), qr.pop();
-            ans += 1, currBank = -1;
+            while(!qr.empty() && qr.front() + w <= l) {
+                w += qr.front();
+                qr.pop();
+            }
+            ans += 1;
+            currBank = -1;
         }
         printf("%d\n",ans);
     }

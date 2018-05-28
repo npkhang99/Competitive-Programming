@@ -1,48 +1,51 @@
-#include <stdio.h>
-#include <string.h>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
-typedef pair<int,int> ii;
+typedef pair<pair<int,string>, int> Triple;
 
-int T, n, t, m, a[10009]={};
-queue<ii> ql, qr;
+const int N = 10009;
 
-int main(){
-    scanf("%d",&T);
-    while(T--){
-        scanf("%d%d%d",&n,&t,&m);
-        for(int i=0; i<m; i++){
-            char bank[10]; int x;
-            scanf("%d%s",&x,bank);
-            if(strcmp(bank,"right") == 0) qr.push(ii(x,i));
-            else ql.push(ii(x,i));
+int n, m, t, ans[N] = {};
+Triple a[N];
+
+int main() {
+    ios::sync_with_stdio(false); cin.tie(0);
+    int TC; cin >> TC;
+    while (TC--) {
+        cin >> n >> m >> t;
+        queue<Triple> left_q, right_q;
+        for (int i = 0; i < m; i++) {
+            cin >> a[i].first.first >> a[i].first.second;
+            a[i].second = i;
         }
 
-        int tt = ql.front().first, cbank = -1;
-        if((!qr.empty() && !ql.empty() && qr.front().first < ql.front().first)
-            || (!qr.empty() && ql.empty())) tt = qr.front().first+t, cbank = 1;
-        while(!ql.empty() || !qr.empty()){
-            // printf("%d %d\n",tt,cbank);
-            int w = 0;
-            if(cbank == -1){
-                while(!ql.empty() && tt >= ql.front().first && w+1 <= n)
-                    a[ql.front().second] = tt + t, w+=1, ql.pop();
-
-                tt += t; cbank = 1;
-                if(!qr.empty() && qr.front().first <= tt) continue;
-                if((qr.empty() && !ql.empty()) ||
-                    (!qr.empty() && !ql.empty() && qr.front().first < ql.front().first))
-                    tt += (ql)
-                continue;
+        int c = 0, time = 0;
+        string ferry_side = "left";
+        while (c < m) {
+            if (left_q.empty() && right_q.empty()){
+                time = a[c].first;
+                if (a[c].second != ferry_side) {
+                    ferry_side = a[c].second;
+                    time += t;
+                }
+                while (c < m && a[c].first <= time) {
+                    if (a[c].second == "right") {
+                        right_q.push(a[c]);
+                    } else {
+                        left_q.push(a[c]);
+                    }
+                    c++;
+                }
             }
-            while(!qr.empty() && tt >= qr.front().first && w+1 <= n)
-                a[qr.front().second] = tt + t, w+=1, qr.pop();
 
+            if (ferry_side == "left") {
+                for (int i = 0; i < m && !left_q.empty(); i++) {
+                    Triple car = left_q.front();
+                    left_q.pop();
+                    
+                }
+            }
         }
-
-        for(int i=0; i<m; i++) printf("%d\n",a[i]);
-        if(T) printf("\n");
     }
     return 0;
 }
