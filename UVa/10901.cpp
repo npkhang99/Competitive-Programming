@@ -1,48 +1,66 @@
-#include <stdio.h>
-#include <string.h>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
 typedef pair<int,int> ii;
+typedef pair<ii,int> iii;
 
-int T, n, t, m, a[10009]={};
-queue<ii> ql, qr;
+int n, t, m, ans[10009] = {}, a[10009] = {};
 
 int main(){
-    scanf("%d",&T);
-    while(T--){
-        scanf("%d%d%d",&n,&t,&m);
-        for(int i=0; i<m; i++){
-            char bank[10]; int x;
-            scanf("%d%s",&x,bank);
-            if(strcmp(bank,"right") == 0) qr.push(ii(x,i));
-            else ql.push(ii(x,i));
+    ios::sync_with_stdio(false); cin.tie(0);
+    int TC; cin >> TC;
+    while (TC--) {
+        cin >> n >> t >> m;
+        queue<int> q[2];
+        for (int i = 0; i < m; i++) {
+            string side;
+            cin >> a[i] >> side;
+            if (side == "left") q[0].push(i);
+            else q[1].push(i);
         }
 
-        int tt = ql.front().first, cbank = -1;
-        if((!qr.empty() && !ql.empty() && qr.front().first < ql.front().first)
-            || (!qr.empty() && ql.empty())) tt = qr.front().first+t, cbank = 1;
-        while(!ql.empty() || !qr.empty()){
-            // printf("%d %d\n",tt,cbank);
-            int w = 0;
-            if(cbank == -1){
-                while(!ql.empty() && tt >= ql.front().first && w+1 <= n)
-                    a[ql.front().second] = tt + t, w+=1, ql.pop();
+        int time = 0, ferry_side = 0;
+        while (!q[0].empty() || !q[1].empty()) {
+            if (q[ferry_side].empty() || q[1 - ferry_side].empty()) {
+                if (q[ferry_side].empty()) {
+                    ferry_side = 1 - ferry_side;
+                    time = max(time, a[q[ferry_side].front()]) + t;
+                } else {
+                    time = max(time, a[q[ferry_side].front()]);
+                }
 
-                tt += t; cbank = 1;
-                if(!qr.empty() && qr.front().first <= tt) continue;
-                if((qr.empty() && !ql.empty()) ||
-                    (!qr.empty() && !ql.empty() && qr.front().first < ql.front().first))
-                    tt += (ql)
-                continue;
+                for (int i = 0; i < n && !q[ferry_side].empty() && a[q[ferry_side].front()] <= time; i++) {
+                    ans[q[ferry_side].front()] = time + t;
+                    q[ferry_side].pop();
+                }
+                ferry_side = 1 - ferry_side;
+                time += t;
+            } else {
+                if (a[q[ferry_side].front()] <= a[q[1 - ferry_side].front()] || a[q[ferry_side].front()] <= time) {
+                    time = max(time, a[q[ferry_side].front()]);
+                    for (int i = 0; i < n && !q[ferry_side].empty() && a[q[ferry_side].front()] <= time; i++) {
+                        ans[q[ferry_side].front()] = time + t;
+                        q[ferry_side].pop();
+                    }
+                    ferry_side = 1 - ferry_side;
+                    time += t;
+                } else {
+                    ferry_side = 1 - ferry_side;
+                    time = max(time, a[q[ferry_side].front()]) + t;
+                    for (int i = 0; i < n && !q[ferry_side].empty() && a[q[ferry_side].front()] <= time; i++) {
+                        ans[q[ferry_side].front()] = time + t;
+                        q[ferry_side].pop();
+                    }
+                    ferry_side = 1 - ferry_side;
+                    time += t;
+                }
             }
-            while(!qr.empty() && tt >= qr.front().first && w+1 <= n)
-                a[qr.front().second] = tt + t, w+=1, qr.pop();
-
         }
 
-        for(int i=0; i<m; i++) printf("%d\n",a[i]);
-        if(T) printf("\n");
+        for (int i = 0; i < m; i++) {
+            cout << ans[i] << "\n";
+        }
+        if (TC != 0) cout << "\n";
     }
     return 0;
 }
