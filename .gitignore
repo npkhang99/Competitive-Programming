@@ -11,3 +11,4 @@ in
 out
 ans
 *.class
+.vscode
