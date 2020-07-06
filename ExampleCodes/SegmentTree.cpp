@@ -62,7 +62,7 @@ int range_update_no_lazy(int i, int l, int r, int L, int R, int newValue){
     return st[i] = max(p1, p2);
 }
 
-// Range Update with Lazy Propagation - Not done
+// Range Update with Lazy Propagation
 int range_update_lazy(int i, int l, int r, int L, int R, int newValue){
     if(lazy[i]){
         st[i] = max(st[i], lazy[i]);

@@ -65,8 +65,9 @@ Procedure BellmanFord;
             if co(a[i]) then chu_trinh_am := true;
 
         if chu_trinh_am then
-            writeln('Do thi ton tai chu trinh am');
-        else for i:=1 to n do
+            writeln('Do thi ton tai chu trinh am')
+        else
+            for i:=1 to n do
                 writeln(s,' -> ',i,' = ',d[i]);
     End;
 //=========================================================
