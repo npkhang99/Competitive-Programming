@@ -30,7 +30,7 @@ int main(){
         rev[y].push_back(x);    // reversed graph (transpose)
     }
 
-    memset(mark, -1, sizeof mark);
+    memset(mark, -1, sizeof(mark));
 
     S.clear(); // first pass is to record the `post-order' of original graph
     for(int i = 1; i <= n; i++){
@@ -38,7 +38,7 @@ int main(){
             Kosaraju(i, 1);
     }
 
-    memset(mark, -1, sizeof mark);
+    memset(mark, -1, sizeof(mark));
 
     int SCC = 0; // second pass: explore the SCCs based on first pass result
     for(int i = n-1; i >= 0; i--){

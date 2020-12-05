@@ -33,13 +33,31 @@ void kmpSearch() {            // this is similar as kmpPreprocess(), but on stri
 int main() {
     strcpy(T, "I DO NOT LIKE SEVENTY SEV BUT SEVENTY SEVENTY SEVEN");
     strcpy(P, "SEVENTY SEVEN");
-    n = (int)strlen(T);
-    m = (int)strlen(P);
+    n = (int) strlen(T);
+    m = (int) strlen(P);
 
     printf("T = '%s'\n", T);
     printf("P = '%s'\n", P);
 
     kmpPreprocess();
+
+    printf("Back (prefix) table for P:\n");
+
+    printf("i = ");
+    for (int i = 0; i < m; i++) {
+        printf("%2d%c", i, " \n"[i == m - 1]);
+    }
+
+    printf("P = ");
+    for (int i = 0; i < m; i++) {
+        printf("%2c%c", P[i], " \n"[i == m - 1]);
+    }
+
+    printf("b = ");
+    for (int i = 0; i < m; i++) {
+        printf("%2d%c", b[i], " \n"[i == m - 1]);
+    }
+
     kmpSearch();
 
     return 0;
