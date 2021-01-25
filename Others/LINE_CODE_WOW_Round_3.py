@@ -7,11 +7,13 @@ Design an algorithm for recommending Articles on a social media for a specific u
                    and an article from X's following friend(s) within 7 days sorted in descending order of views and creation time. Prioritize a fanpage
                    article to appeared first on the timeline if it is possible.
 - Second priority: Alternate between a public article with over 1000 views, posted within 7 days and sorted in descending order of views and creation time and
-                   an article from X's folloing user(s) with over 100 views, posted within 7 days and sorted in descending order of views and creation time.
+                   an article from X's following user(s) with over 100 views, posted within 7 days and sorted in descending order of views and creation time.
                    Prioritize a public article to appeared first on the timeline if it is possible.
 - Third priority:  Show all the articles from X's friend(s), sorted in descending order of views and creation time.
 
-Note: Two users are friends with each other does not meant that they are following each other.
+Note:
+- Two users are friends with each other does not mean that they are following each other.
+- All articles must appear only once across all 3 priorities
 
 Input:
 
@@ -28,8 +30,8 @@ For all articles: a restricted article can only be seen by the user's friend(s),
 
 Output:
 
-With each priority, output a single line of recommended article(s), all of which must match all the criterias provided in the above descriptions, including the
-oder of appearance. The first, second and third line is the list of recommended article(s) for the first, second and third priority, respectively.
+With each priority, output a single line of recommended article(s), all of which must match all the criteria provided in the above descriptions, including the
+order of appearance. The first, second, and third line is the list of recommended article(s) for the first, second, and third priority, respectively.
 
 Example:
 
