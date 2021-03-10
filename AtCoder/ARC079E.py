@@ -6,7 +6,7 @@ while True:
     c = 0
     exist = False
     for i in range(n):
-        if a[i] > n-1:
+        if a[i] > n - 1:
             c = a[i] // n
             a[i] %= n
             for j in range(n):

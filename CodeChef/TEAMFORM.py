@@ -5,6 +5,6 @@ for _ in range(TC):
     for i in range(m):
         input()
     if n % 2 == 0:
-        print('yes')
+        print("yes")
     else:
-        print('no')
+        print("no")

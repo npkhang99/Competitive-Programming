@@ -1,2 +1,2 @@
 n = int(input())
-print(n//2520)
+print(n // 2520)

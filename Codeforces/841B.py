@@ -7,6 +7,6 @@ for i in a:
         cnt += 1
 
 if cnt == 0:
-    print('Second')
+    print("Second")
 else:
-    print('First')
+    print("First")

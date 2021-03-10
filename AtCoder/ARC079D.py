@@ -8,7 +8,7 @@ if k == 1:
     print("2\n2 0")
     exit(0)
 
-n = min(50,k)
+n = min(50, k)
 a = [i for i in range(n)]
 c = k // n
 
@@ -23,5 +23,5 @@ for i in range(k % n):
 
 print(n)
 for i in a:
-    print(i, end=' ')
+    print(i, end=" ")
 print()

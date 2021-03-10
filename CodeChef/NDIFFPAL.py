@@ -1,6 +1,6 @@
 # CodeChef
-alph = 'abcdefghijklmnopqrstuvwxyz'
+alph = "abcdefghijklmnopqrstuvwxyz"
 
 for TC in range(int(input())):
     n = int(input())
-    print(alph*(n//len(alph)) + alph[:n%len(alph)])
+    print(alph * (n // len(alph)) + alph[: n % len(alph)])

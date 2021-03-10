@@ -1,10 +1,10 @@
-a,b,c = [int(i) for i in input().split()]
+a, b, c = [int(i) for i in input().split()]
 
 if a == b == c:
-    print('*')
+    print("*")
 elif a == b and b != c:
-    print('C')
+    print("C")
 elif a == c and c != b:
-    print('B')
+    print("B")
 else:
-    print('A')
+    print("A")

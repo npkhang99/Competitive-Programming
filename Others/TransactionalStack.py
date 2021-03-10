@@ -4,7 +4,8 @@ class TransactionNode:
         self.value = value
 
     def __str__(self) -> str:
-        return f'({self.transaction_type}, {self.value})'
+        return f"({self.transaction_type}, {self.value})"
+
 
 class TransactionalStack:
     def __init__(self):
@@ -17,7 +18,7 @@ class TransactionalStack:
         # how many active transactions are there?
         self.active_transaction_count = 0
 
-    def push(self, value, rolling_back = False) -> None:
+    def push(self, value, rolling_back=False) -> None:
         self.stack.append(value)
         self.size += 1
 
@@ -27,9 +28,11 @@ class TransactionalStack:
         the latest transaction log stack
         """
         if not rolling_back and self.active_transaction_count > 0:
-            self.transaction_log_stack[-1].append(TransactionNode("push", value))
+            self.transaction_log_stack[-1].append(
+                TransactionNode("push", value)
+            )
 
-    def __pop__(self, rolling_back = False) -> bool:
+    def __pop__(self, rolling_back=False) -> bool:
         if self.size == 0:
             return False
 
@@ -42,7 +45,9 @@ class TransactionalStack:
         the latest transaction log stack
         """
         if not rolling_back and self.active_transaction_count > 0:
-            self.transaction_log_stack[-1].append(TransactionNode("pop", value_popped))
+            self.transaction_log_stack[-1].append(
+                TransactionNode("pop", value_popped)
+            )
         return True
 
     def pop(self, k) -> None:
@@ -80,9 +85,9 @@ class TransactionalStack:
             action = self.transaction_log_stack[-1].pop()
 
             if action.transaction_type == "push":
-                self.__pop__(rolling_back = True)
+                self.__pop__(rolling_back=True)
             elif action.transaction_type == "pop":
-                self.push(value = action.value, rolling_back = True)
+                self.push(value=action.value, rolling_back=True)
 
         self.transaction_log_stack.pop()
         self.active_transaction_count -= 1
@@ -110,6 +115,7 @@ class TransactionalStack:
         self.active_transaction_count -= 1
         return True
 
+
 def main():
     q = int(input())
 
@@ -129,18 +135,23 @@ def main():
                 print(stack.top(value))
             else:
                 # for validating input purposes only
-                raise ValueError("Action `{}` not defined in statement".format(action))
+                raise ValueError(
+                    "Action `{}` not defined in statement".format(action)
+                )
         elif len(line) == 1:
             action = line[0]
             if action == "begin":
                 stack.begin()
             elif action == "commit":
-                print('true' if stack.commit() else 'false')
+                print("true" if stack.commit() else "false")
             elif action == "rollback":
-                print('true' if stack.rollback() else 'false')
+                print("true" if stack.rollback() else "false")
             else:
                 # for validating input purposes only
-                raise ValueError("Action `{}` not defined in statement".format(action))
+                raise ValueError(
+                    "Action `{}` not defined in statement".format(action)
+                )
+
 
 if __name__ == "__main__":
     main()

@@ -23,7 +23,7 @@ for test_case in range(int(input())):
 
     t.pop()
 
-    ans = 'Case #{}:'.format(test_case + 1)
+    ans = "Case #{}:".format(test_case + 1)
     for i in sorted(t[(v - 1) % len(t)][:k]):
         ans += " " + name[i]
     print(ans)

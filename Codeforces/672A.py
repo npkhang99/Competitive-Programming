@@ -1,9 +1,9 @@
 n = int(input())
-i=0
-s=''
+i = 0
+s = ""
 
-while len(s)<n:
-    i+=1
-    s+=str(i)
+while len(s) < n:
+    i += 1
+    s += str(i)
 
-print(s[n-1])
+print(s[n - 1])

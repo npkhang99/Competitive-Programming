@@ -1,3 +1,3 @@
-a,b,c = int(input()),int(input()),int(input())
+a, b, c = int(input()), int(input()), int(input())
 
-print(max(a+b+c,a+b*c,a*b+c,a*b*c,(a+b)*c,a*(b+c)))
+print(max(a + b + c, a + b * c, a * b + c, a * b * c, (a + b) * c, a * (b + c)))

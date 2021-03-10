@@ -5,7 +5,8 @@
 #         self.left = left
 #         self.right = right
 
-INF = 10**18
+INF = 10 ** 18
+
 
 class Solution:
     def validate(self, root, less_than, greater_than):
@@ -15,7 +16,9 @@ class Solution:
         if root.val >= less_than or root.val <= greater_than:
             return False
 
-        return self.validate(root.left, root.val, greater_than) and self.validate(root.right, less_than, root.val)
+        return self.validate(
+            root.left, root.val, greater_than
+        ) and self.validate(root.right, less_than, root.val)
 
     def isValidBST(self, root: TreeNode) -> bool:
         return self.validate(root, INF, -INF)

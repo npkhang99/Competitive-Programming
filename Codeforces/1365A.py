@@ -17,5 +17,6 @@ def main():
 
         print("Ashish" if moves_left % 2 == 1 else "Vivek")
 
+
 if __name__ == "__main__":
     main()

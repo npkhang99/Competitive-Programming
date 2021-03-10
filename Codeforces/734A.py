@@ -1,6 +1,6 @@
-n,st = int(input()),input()
+n, st = int(input()), input()
 
-cnt1,cnt2 = st.count('A'), st.count('D')
+cnt1, cnt2 = st.count("A"), st.count("D")
 
 if cnt1 > cnt2:
     print("Anton")

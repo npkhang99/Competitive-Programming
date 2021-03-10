@@ -79,6 +79,7 @@ But I'm not capable of that, though :)
 
 """
 
+
 class Fanpage:
     def __init__(self, id: int) -> None:
         self.__id = id
@@ -93,6 +94,7 @@ class Fanpage:
 
     def get_articles(self) -> set:
         return self.__articles
+
 
 class User:
     def __init__(self, id: int) -> None:
@@ -139,8 +141,17 @@ class User:
     def get_articles(self) -> set:
         return self.__articles
 
+
 class Article:
-    def __init__(self, id: int, uploader_id: int, type: str, timestamp: datetime, views: int, audience = "public") -> None:
+    def __init__(
+        self,
+        id: int,
+        uploader_id: int,
+        type: str,
+        timestamp: datetime,
+        views: int,
+        audience="public",
+    ) -> None:
         self.__id = id
         self.__uploader_id = uploader_id
         self.__type = type
@@ -164,7 +175,7 @@ class Article:
 
     def is_within_seven_days_until(self, timestamp: datetime) -> bool:
         delta = timestamp - self.__timestamp
-        return 0 <= delta.total_seconds() <= timedelta(days = 7).total_seconds()
+        return 0 <= delta.total_seconds() <= timedelta(days=7).total_seconds()
 
     def is_public(self) -> bool:
         return self.__audience == "public"
@@ -173,24 +184,31 @@ class Article:
     def is_viewable_with_user(self, user: User) -> bool:
         # if the audience of this Article is restricted and the user is not friend with the uploader, than they can not see this Article
         # otherwise, yes, they can
-        if self.__audience == "restricted" and not user.is_friend_with(self.__uploader_id):
+        if self.__audience == "restricted" and not user.is_friend_with(
+            self.__uploader_id
+        ):
             return False
         return True
 
     def is_posted_before(self, timestamp: datetime) -> bool:
         return self.__timestamp <= timestamp
 
+
 """
 input parsing helper functions
 
 """
+
+
 def create_user(user: int, users: dict[int, User]) -> None:
     if user not in users:
         users[user] = User(user)
 
+
 def create_fanpage(fanpage: int, fanpages: dict[int, Fanpage]) -> None:
     if fanpage not in fanpages:
         fanpages[fanpage] = Fanpage(fanpage)
+
 
 def make_friend(user1: int, user2: int, users: dict[int, User]) -> None:
     create_user(user1, users)
@@ -199,19 +217,36 @@ def make_friend(user1: int, user2: int, users: dict[int, User]) -> None:
     users[user1].make_friend_with(user2)
     users[user2].make_friend_with(user1)
 
-def make_follow_user(follower: int, follows: int, users: dict[int, User]) -> None:
+
+def make_follow_user(
+    follower: int, follows: int, users: dict[int, User]
+) -> None:
     create_user(follower, users)
     create_user(follows, users)
 
     users[follower].follows_user(follows)
 
-def make_follow_fanpage(follower: int, follows: int, users: dict[int, User], fanpages: dict[int, Fanpage]) -> None:
+
+def make_follow_fanpage(
+    follower: int,
+    follows: int,
+    users: dict[int, User],
+    fanpages: dict[int, Fanpage],
+) -> None:
     create_user(follower, users)
     create_fanpage(follows, fanpages)
 
     users[follower].follows_fanpage(follows)
 
-def make_fanpage_article(article_id: int, fanpage: int, creation_time: datetime, views: int, fanpages: dict[int, Fanpage], articles: dict[int, Article]) -> None:
+
+def make_fanpage_article(
+    article_id: int,
+    fanpage: int,
+    creation_time: datetime,
+    views: int,
+    fanpages: dict[int, Fanpage],
+    articles: dict[int, Article],
+) -> None:
     create_fanpage(fanpage, fanpages)
 
     article = Article(article_id, fanpage, "fanpage", creation_time, views)
@@ -219,7 +254,16 @@ def make_fanpage_article(article_id: int, fanpage: int, creation_time: datetime,
 
     fanpages[fanpage].add_article(article_id)
 
-def make_user_article(article_id: int, user: int, creation_time: datetime, views: int, audience: str, users: dict[int, User], articles: dict[int, Article]) -> None:
+
+def make_user_article(
+    article_id: int,
+    user: int,
+    creation_time: datetime,
+    views: int,
+    audience: str,
+    users: dict[int, User],
+    articles: dict[int, Article],
+) -> None:
     create_user(user, users)
 
     article = Article(article_id, user, "user", creation_time, views, audience)
@@ -227,11 +271,21 @@ def make_user_article(article_id: int, user: int, creation_time: datetime, views
 
     users[user].add_article(article_id)
 
+
 """
 main processing functions for priority levels
 
 """
-def make_first_priority(user: User, timestamp: datetime, seen: set[int], users: dict[int, User], articles: dict[int, Article], fanpages: dict[int, Fanpage]) -> list:
+
+
+def make_first_priority(
+    user: User,
+    timestamp: datetime,
+    seen: set[int],
+    users: dict[int, User],
+    articles: dict[int, Article],
+    fanpages: dict[int, Fanpage],
+) -> list:
     # articles from following fanpages
     fanpage_articles = []
     for fanpage in user.get_following_fanpages():
@@ -240,17 +294,17 @@ def make_first_priority(user: User, timestamp: datetime, seen: set[int], users: 
                 fanpage_articles.append(article_id)
                 seen.add(article_id)
 
-    fanpage_articles = sorted(fanpage_articles, key = lambda k: articles[k])
+    fanpage_articles = sorted(fanpage_articles, key=lambda k: articles[k])
 
     # articles from following friends
     user_articles = []
-    for user_id in (user.get_following_users() & user.get_friends()):
+    for user_id in user.get_following_users() & user.get_friends():
         for article_id in users[user_id].get_articles():
             if articles[article_id].is_within_seven_days_until(timestamp):
                 user_articles.append(article_id)
                 seen.add(article_id)
 
-    user_articles = sorted(user_articles, key = lambda k: articles[k])
+    user_articles = sorted(user_articles, key=lambda k: articles[k])
 
     # merge and alternating between fanpage articles and user articles
     show_articles = []
@@ -265,25 +319,42 @@ def make_first_priority(user: User, timestamp: datetime, seen: set[int], users: 
 
     return show_articles
 
-def make_second_priority(user: User, timestamp: datetime, seen: set[int], users: dict[int, User], articles: dict[int, Article]) -> list:
+
+def make_second_priority(
+    user: User,
+    timestamp: datetime,
+    seen: set[int],
+    users: dict[int, User],
+    articles: dict[int, Article],
+) -> list:
     #  public articles
     public_articles = []
     for article in articles.values():
-        if article.is_public() and article.get_views() > 1000 and article.is_within_seven_days_until(timestamp) and article.get_id() not in seen:
+        if (
+            article.is_public()
+            and article.get_views() > 1000
+            and article.is_within_seven_days_until(timestamp)
+            and article.get_id() not in seen
+        ):
             public_articles.append(article.get_id())
             seen.add(article.get_id())
 
-    public_articles = sorted(public_articles, key = lambda k: articles[k])
+    public_articles = sorted(public_articles, key=lambda k: articles[k])
 
     # articles from following users (need not to be friend)
     user_articles = []
     for user_id in user.get_following_users():
         for article_id in users[user_id].get_articles():
-            if articles[article_id].get_views() > 100 and articles[article_id].is_within_seven_days_until(timestamp) and articles[article_id].is_viewable_with_user(user) and article_id not in seen:
+            if (
+                articles[article_id].get_views() > 100
+                and articles[article_id].is_within_seven_days_until(timestamp)
+                and articles[article_id].is_viewable_with_user(user)
+                and article_id not in seen
+            ):
                 user_articles.append(article_id)
                 seen.add(article_id)
 
-    user_articles = sorted(user_articles, key = lambda k: articles[k])
+    user_articles = sorted(user_articles, key=lambda k: articles[k])
 
     # merge and alternating between fanpage articles and user articles
     show_articles = []
@@ -298,24 +369,39 @@ def make_second_priority(user: User, timestamp: datetime, seen: set[int], users:
 
     return show_articles
 
-def make_third_priority(user: User, timestamp: datetime, seen: set[int], users: dict[int, User], articles: dict[int, Article]) -> list:
+
+def make_third_priority(
+    user: User,
+    timestamp: datetime,
+    seen: set[int],
+    users: dict[int, User],
+    articles: dict[int, Article],
+) -> list:
     show_articles = []
 
     # articles from friends
     for user_id in user.get_friends():
         for article_id in users[user_id].get_articles():
-            if articles[article_id].is_posted_before(timestamp) and article_id not in seen:
+            if (
+                articles[article_id].is_posted_before(timestamp)
+                and article_id not in seen
+            ):
                 show_articles.append(article_id)
                 seen.add(article_id)
 
-    show_articles = sorted(show_articles, key = lambda k: articles[k], reverse = True)
+    show_articles = sorted(
+        show_articles, key=lambda k: articles[k], reverse=True
+    )
 
     return show_articles
+
 
 """
 main function
 
 """
+
+
 def main() -> None:
     users = dict()
     articles = dict()
@@ -344,23 +430,38 @@ def main() -> None:
         elif type == "fanpage-article":
             article_id, fanpage, creation_time, views = args
             creation_time = datetime.strptime(creation_time, datetime_format)
-            make_fanpage_article(article_id, fanpage, creation_time, views, fanpages, articles)
+            make_fanpage_article(
+                article_id, fanpage, creation_time, views, fanpages, articles
+            )
         elif type == "user-article":
             article_id, user, creation_time, views, audience = args
             creation_time = datetime.strptime(creation_time, datetime_format)
-            make_user_article(article_id, user, creation_time, views, audience, users, articles)
+            make_user_article(
+                article_id,
+                user,
+                creation_time,
+                views,
+                audience,
+                users,
+                articles,
+            )
         else:
             # input checking
-            raise TypeError(f"Action `{type}` not defined in the problem statement")
+            raise TypeError(
+                f"Action `{type}` not defined in the problem statement"
+            )
 
     user_id, timestamp = input().split()
     user = users[int(user_id)]
     timestamp = datetime.strptime(timestamp, datetime_format)
 
     seen = set()
-    print(*make_first_priority(user, timestamp, seen, users, articles, fanpages))
+    print(
+        *make_first_priority(user, timestamp, seen, users, articles, fanpages)
+    )
     print(*make_second_priority(user, timestamp, seen, users, articles))
     print(*make_third_priority(user, timestamp, seen, users, articles))
+
 
 if __name__ == "__main__":
     main()

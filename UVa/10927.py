@@ -1,6 +1,7 @@
 import math
 import sys
 
+
 class point:
     def __init__(self, x, y, z):
         self.x = x
@@ -10,8 +11,10 @@ class point:
     def __str__(self):
         return "x = {}, y = {}".format(self.x, self.y)
 
+
 def distance(p):
     return p.x ** 2 + p.y ** 2
+
 
 def solve_normal(a):
     angles = dict()
@@ -27,7 +30,9 @@ def solve_normal(a):
     for angle, points in angles.items():
         # print('Angle: {:5.2f} | Points: {}'.format(angle, ''.join('(' + str(p) + ', z = {}); '.format(p.z) for p in points)), file = sys.stderr)
         highest_z = -1
-        for p in sorted(points, key = lambda k: k.x if k.x > 0 else -k.x if k.x < 0 else k.y):
+        for p in sorted(
+            points, key=lambda k: k.x if k.x > 0 else -k.x if k.x < 0 else k.y
+        ):
             if p.z <= highest_z:
                 not_visible.append(p)
             else:
@@ -35,8 +40,9 @@ def solve_normal(a):
 
     return not_visible
 
+
 def solve_ox(a):
-    a = sorted(a, key = lambda k: k.x)
+    a = sorted(a, key=lambda k: k.x)
 
     k = 0
     while k < len(a) and a[k].x < 0:
@@ -59,6 +65,7 @@ def solve_ox(a):
 
     return not_visible
 
+
 def main():
     data_set = 0
     while True:
@@ -71,7 +78,7 @@ def main():
             x, y, z = map(int, input().split())
             a.append(point(x, y, z))
 
-        a = sorted(a, key = lambda k: (-k.y, k.x, k.z))
+        a = sorted(a, key=lambda k: (-k.y, k.x, k.z))
 
         not_visible = []
         l, r = 0, 0
@@ -93,12 +100,17 @@ def main():
         not_visible += solve_normal(a[l:n])
 
         data_set += 1
-        print('Data set {}:'.format(data_set))
+        print("Data set {}:".format(data_set))
         if len(not_visible) == 0:
-            print('All the lights are visible.')
+            print("All the lights are visible.")
         else:
-            print('Some lights are not visible:')
-            print(*sorted(not_visible, key = lambda k: (k.x, k.y)), sep = ';\n', end = '.\n')
+            print("Some lights are not visible:")
+            print(
+                *sorted(not_visible, key=lambda k: (k.x, k.y)),
+                sep=";\n",
+                end=".\n"
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

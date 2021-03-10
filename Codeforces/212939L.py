@@ -8,7 +8,7 @@ for c in st:
 
 x = 1
 
-for i in range(ord('a'), ord('z')+1):
+for i in range(ord("a"), ord("z") + 1):
     if cnt[i] > 1:
         x *= math.factorial(cnt[i])
 
@@ -19,7 +19,7 @@ ways = str(math.factorial(n) // x)
 
 ans = 0
 for c in ways[::-1]:
-    if c == '0':
+    if c == "0":
         ans += 1
     else:
         break
